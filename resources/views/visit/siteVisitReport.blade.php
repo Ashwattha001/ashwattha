@@ -160,17 +160,14 @@
                                     <table class="table table-bordered dt-responsive nowrap w-100 table table-striped" id="in_datatable"> 
                                         <thead>
                                             <tr>
-                                            <th scope="col" style="width: 20px;">Sr.No</th>
-                                                <th scope="col" style="width: 100px">Enquiry No</th>
+                                                <th scope="col" style="width: 20px;">Sr.No</th>
+                                                <th scope="col" style="width: 100px">Visit Date</th>
                                                 <th scope="col">Action</th>
-                                                <th scope="col" style="width: 100px">Status</th>
+                                                <th scope="col" style="white-space: normal;">Visit By</th>
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
-                                                <th scope="col" style="width: 100px">Task Date</th>
-                                                <th scope="col" style="width: 100px">End Date</th>
-                                                <th scope="col" style="width: 100px">Task Remark</th>
-                                                <th scope="col" style="width: 100px">Who Assigned</th>
-                                                <th scope="col" style="width: 100px">Team Member</th>
-                                                <th scope="col" style="width: 100px">Team Member Remark</th>
+                                                <th scope="col" style="width: 100px">Contractor</th>
+                                                <th scope="col" style="width: 100px">Stage of Construction</th>
+
                                             </tr>
                                         </thead>
                                         <tbody id="in_records">
@@ -184,17 +181,14 @@
                                     <table class="table table-bordered dt-responsive nowrap w-100 table table-striped" id="la_datatable"> 
                                         <thead>
                                             <tr>
-                                            <th scope="col" style="width: 20px;">Sr.No</th>
-                                                <th scope="col" style="width: 100px">Enquiry No</th>
+                                                <th scope="col" style="width: 20px;">Sr.No</th>
+                                                <th scope="col" style="width: 100px">Visit Date</th>
                                                 <th scope="col">Action</th>
-                                                <th scope="col" style="width: 100px">Status</th>
+                                                <th scope="col" style="white-space: normal;">Visit By</th>
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
-                                                <th scope="col" style="width: 100px">Task Date</th>
-                                                <th scope="col" style="width: 100px">End Date</th>
-                                                <th scope="col" style="width: 100px">Task Remark</th>
-                                                <th scope="col" style="width: 100px">Who Assigned</th>
-                                                <th scope="col" style="width: 100px">Team Member</th>
-                                                <th scope="col" style="width: 100px">Team Member Remark</th>
+                                                <th scope="col" style="width: 100px">Contractor</th>
+                                                <th scope="col" style="width: 100px">Stage of Construction</th>
+
                                             </tr>
                                         </thead>
                                         <tbody id="la_records">
@@ -209,16 +203,13 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col" style="width: 20px;">Sr.No</th>
-                                                <th scope="col" style="width: 100px">Enquiry No</th>
+                                                <th scope="col" style="width: 100px">Visit Date</th>
                                                 <th scope="col">Action</th>
-                                                <th scope="col" style="width: 100px">Status</th>
+                                                <th scope="col" style="white-space: normal;">Visit By</th>
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
-                                                <th scope="col" style="width: 100px">Task Date</th>
-                                                <th scope="col" style="width: 100px">End Date</th>
-                                                <th scope="col" style="width: 100px">Task Remark</th>
-                                                <th scope="col" style="width: 100px">Who Assigned</th>
-                                                <th scope="col" style="width: 100px">Team Member</th>
-                                                <th scope="col" style="width: 100px">Team Member Remark</th>
+                                                <th scope="col" style="width: 100px">Contractor</th>
+                                                <th scope="col" style="width: 100px">Stage of Construction</th>
+
                                             </tr>
                                         </thead>
                                         <tbody id="sa_records">
@@ -233,16 +224,13 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col" style="width: 20px;">Sr.No</th>
-                                                <th scope="col" style="width: 100px">Enquiry No</th>
+                                                <th scope="col" style="width: 100px">Visit Date</th>
                                                 <th scope="col">Action</th>
-                                                <th scope="col" style="width: 100px">Status</th>
+                                                <th scope="col" style="white-space: normal;">Visit By</th>
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
-                                                <th scope="col" style="width: 100px">Task Date</th>
-                                                <th scope="col" style="width: 100px">End Date</th>
-                                                <th scope="col" style="width: 100px">Task Remark</th>
-                                                <th scope="col" style="width: 100px">Who Assigned</th>
-                                                <th scope="col" style="width: 100px">Team Member</th>
-                                                <th scope="col" style="width: 100px">Team Member Remark</th>
+                                                <th scope="col" style="width: 100px">Contractor</th>
+                                                <th scope="col" style="width: 100px">Stage of Construction</th>
+
                                             </tr>
                                         </thead>
                                         <tbody id="ud_records">
@@ -363,7 +351,7 @@
         // $('.task_project').show();
         // $('.project_name').hide();
         // $('#project_type,#team_member').prop('disabled', false);
-        // getVisits();
+        getVisits();
 
     });
 
@@ -377,7 +365,7 @@
         // $('.project_name').hide(); 
         // $('#project_type,#team_member').prop('disabled', false);
 
-        // getVisits();
+        getVisits();
     });
 
     //For set/unset select field
@@ -390,7 +378,7 @@
         // $('.project_name').hide();   
         // $('#project_type,#team_member').prop('disabled', false);
 
-        // getVisits();
+        getVisits();
     });
 
     //For set/unset select field
@@ -403,7 +391,7 @@
         // $('.project_name').hide();
         // $('#project_type,#team_member').prop('disabled', false);
 
-        // getVisits();
+        getVisits();
     });
 
     //For set/unset select field
@@ -417,7 +405,7 @@
         // $('.project_name').hide();
         // $('#project_type,#team_member').prop('disabled', false);
 
-        // getVisits();
+        getVisits();
     });
 
     getVisits();
@@ -473,17 +461,40 @@
 
                     if(row.project_type == "Interior")
                     {
+                        content1 +="<tr>";
+                        content1 +="<td>"+ ++i  +"</td>";
+                        content1 +="<td>"+row.visit_date+"</td>";
+                        
+                        content1 +="<td>";
+                            content1 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-visit_date='"+row.visit_date+"' data-pr_id='"+row.pr_id+"' data-project_type='"+row.project_type+"' data-stage_contr='"+row.stage_contr+"' href='edit_visit/"+row.id+"'><i class='far fa-edit'></i></a> ";
+                            if(data.roles == 0){
+                                content1 +="<button class='btn btn-outline-secondary btn-sm delI' rel='tooltip' data-bs-placement='top' title='Delete Task' data-id='"+row.id+"'><i class='fas fa-trash-alt'></i></button>";
+                            }
+                           
+                        content1 += "</td>";
+                        content1 +="<td>"+row.name+"</td>";
+                        content1 +="<td>"+row.project_name+"</td>";
+                        content1 +="<td>"+row.contractor+"</td>";
+                        content1 +="<td>"+row.stage_contr+"</td>";
+                        content1 += "</tr>";
+
+                        
+                    }
+                    
+                    if(row.project_type == "Landscape")
+                    {
                         content2 +="<tr>";
-                        content2 +="<td>"+ ++j  +"</td>";
+                        content2 +="<td>"+ ++i  +"</td>";
                         content2 +="<td>"+row.visit_date+"</td>";
                         
                         content2 +="<td>";
-                            content2 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-visit_date='"+row.visit_date+"' data-pr_id='"+row.pr_id+"' data-project_type='"+row.project_type+"' data-stage_contr='"+row.stage_contr+"'><i class='far fa-edit'></i></a> ";
+                            content2 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-visit_date='"+row.visit_date+"' data-pr_id='"+row.pr_id+"' data-project_type='"+row.project_type+"' data-stage_contr='"+row.stage_contr+"' href='edit_visit/"+row.id+"'><i class='far fa-edit'></i></a> ";
                             if(data.roles == 0){
                                 content2 +="<button class='btn btn-outline-secondary btn-sm delI' rel='tooltip' data-bs-placement='top' title='Delete Task' data-id='"+row.id+"'><i class='fas fa-trash-alt'></i></button>";
                             }
                            
                         content2 += "</td>";
+                        content2 +="<td>"+row.name+"</td>";
                         content2 +="<td>"+row.project_name+"</td>";
                         content2 +="<td>"+row.contractor+"</td>";
                         content2 +="<td>"+row.stage_contr+"</td>";
@@ -491,20 +502,21 @@
 
                         
                     }
-                    
+
                     if(row.project_type == "Sustainable")
                     {
                         content3 +="<tr>";
-                        content3 +="<td>"+ ++k  +"</td>";
+                        content3 +="<td>"+ ++i  +"</td>";
                         content3 +="<td>"+row.visit_date+"</td>";
                         
                         content3 +="<td>";
-                            content3 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-visit_date='"+row.visit_date+"' data-pr_id='"+row.pr_id+"' data-project_type='"+row.project_type+"' data-stage_contr='"+row.stage_contr+"'><i class='far fa-edit'></i></a> ";
+                            content3 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-visit_date='"+row.visit_date+"' data-pr_id='"+row.pr_id+"' data-project_type='"+row.project_type+"' data-stage_contr='"+row.stage_contr+"' href='edit_visit/"+row.id+"'><i class='far fa-edit'></i></a> ";
                             if(data.roles == 0){
                                 content3 +="<button class='btn btn-outline-secondary btn-sm delI' rel='tooltip' data-bs-placement='top' title='Delete Task' data-id='"+row.id+"'><i class='fas fa-trash-alt'></i></button>";
                             }
                            
                         content3 += "</td>";
+                        content3 +="<td>"+row.name+"</td>";
                         content3 +="<td>"+row.project_name+"</td>";
                         content3 +="<td>"+row.contractor+"</td>";
                         content3 +="<td>"+row.stage_contr+"</td>";
@@ -516,16 +528,17 @@
                     if(row.project_type == "Urban Design")
                     {
                         content4 +="<tr>";
-                        content4 +="<td>"+ ++l  +"</td>";
+                        content4 +="<td>"+ ++i  +"</td>";
                         content4 +="<td>"+row.visit_date+"</td>";
                         
                         content4 +="<td>";
-                            content4 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-visit_date='"+row.visit_date+"' data-pr_id='"+row.pr_id+"' data-project_type='"+row.project_type+"' data-stage_contr='"+row.stage_contr+"'><i class='far fa-edit'></i></a> ";
+                            content4 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-visit_date='"+row.visit_date+"' data-pr_id='"+row.pr_id+"' data-project_type='"+row.project_type+"' data-stage_contr='"+row.stage_contr+"' href='edit_visit/"+row.id+"'><i class='far fa-edit'></i></a> ";
                             if(data.roles == 0){
                                 content4 +="<button class='btn btn-outline-secondary btn-sm delI' rel='tooltip' data-bs-placement='top' title='Delete Task' data-id='"+row.id+"'><i class='fas fa-trash-alt'></i></button>";
                             }
                            
                         content4 += "</td>";
+                        content4 +="<td>"+row.name+"</td>";
                         content4 +="<td>"+row.project_name+"</td>";
                         content4 +="<td>"+row.contractor+"</td>";
                         content4 +="<td>"+row.stage_contr+"</td>";

@@ -10,11 +10,11 @@ class CommonController extends Controller
 {
     static function custEnqNumber($project_type)
     {
-        $enq_obj=AutoValuesModel::select('id','architecture_no','interior_no','landscape_no','sustainable_no','cur_yr','nxt_yr')->orderby('id','desc')->first();
+        $enq_obj=AutoValuesModel::select('id','architecture_no','interior_no','landscape_no','sustainable_no','urbandes_no','cur_yr','nxt_yr')->orderby('id','desc')->first();
         $enquiry_number;
         if($enq_obj){
 
-            $day = date("d"); $month = date("m"); $year = date("y"); 
+            $day = date("d"); $month = date("m"); $year = date("Y"); 
 
             if( ($day == '01') && ($month == '04') && ($enq_obj->nxt_yr == $year) ){
                 
@@ -37,6 +37,10 @@ class CommonController extends Controller
                 {
                     $cpoi_obj->sustainable_no=1;
                 }
+                elseif($project_type == "Urban Design")
+                {
+                    $cpoi_obj->urbandes_no=1;
+                }
                 $cpoi_obj->cur_yr=$year;
                 $cpoi_obj->nxt_yr=$nxt_yr;
                 $res=$cpoi_obj->update();
@@ -45,19 +49,23 @@ class CommonController extends Controller
                 //change on project type
                 if($project_type == "Architecture")
                 {
-                    $enquiry_number = "EQ/$year-$nxt_yr/AR/$num_padded";
+                    $enquiry_number = "EQ/$year/AR/$num_padded";
                 }
                 elseif($project_type == "Interior")
                 {
-                    $enquiry_number = "EQ/$year-$nxt_yr/IN/$num_padded";
+                    $enquiry_number = "EQ/$year/IN/$num_padded";
                 }
                 elseif($project_type == "Landscape")
                 {
-                    $enquiry_number = "EQ/$year-$nxt_yr/LA/$num_padded";
+                    $enquiry_number = "EQ/$year/LA/$num_padded";
                 }
                 elseif($project_type == "Sustainable")
                 {
-                    $enquiry_number = "EQ/$year-$nxt_yr/SA/$num_padded";
+                    $enquiry_number = "EQ/$year/SA/$num_padded";
+                }
+                elseif($project_type == "Urban Design")
+                {
+                    $enquiry_number = "EQ/$year/UD/$num_padded";
                 }
                 
 
@@ -81,6 +89,10 @@ class CommonController extends Controller
                 {
                     $cpoi_obj->sustainable_no= ($enq_obj->sustainable_no) + 1;
                 }
+                elseif($project_type == "Urban Design")
+                {
+                    $cpoi_obj->urbandes_no= ($enq_obj->urbandes_no) + 1;
+                }
                 $res=$cpoi_obj->update();
 
 
@@ -89,24 +101,28 @@ class CommonController extends Controller
                 if($project_type == "Architecture")
                 {
                     $num_padded = sprintf("%03d", (($enq_obj->architecture_no) + 1));
-                    $enquiry_number = "EQ/$year-$nxt_yr/AR/$num_padded";
+                    $enquiry_number = "EQ/$year/AR/$num_padded";
                 }
                 elseif($project_type == "Interior")
                 {
                     $num_padded = sprintf("%03d", (($enq_obj->interior_no) + 1));
-                    $enquiry_number = "EQ/$year-$nxt_yr/IN/$num_padded";
+                    $enquiry_number = "EQ/$year/IN/$num_padded";
                 }
                 elseif($project_type == "Landscape")
                 {
                     $num_padded = sprintf("%03d", (($enq_obj->landscape_no) + 1));
-                    $enquiry_number = "EQ/$year-$nxt_yr/LA/$num_padded";
+                    $enquiry_number = "EQ/$year/LA/$num_padded";
                 }
                 elseif($project_type == "Sustainable")
                 {
                     $num_padded = sprintf("%03d", (($enq_obj->sustainable_no) + 1));
-                    $enquiry_number = "EQ/$year-$nxt_yr/SA/$num_padded";
+                    $enquiry_number = "EQ/$year/SA/$num_padded";
                 }
-
+                elseif($project_type == "Urban Design")
+                {
+                    $num_padded = sprintf("%03d", (($enq_obj->urbandes_no) + 1));
+                    $enquiry_number = "EQ/$year/UD/$num_padded";
+                }
                 
                 
             }
@@ -133,6 +149,10 @@ class CommonController extends Controller
             {
                 $cpoi_obj->sustainable_no=1;
             }
+            elseif($project_type == "Urban Design")
+            {
+                $cpoi_obj->urbandes_no=1;
+            }
             $cpoi_obj->cur_yr=$year;
             $cpoi_obj->nxt_yr=$nxt_yr;
             $res=$cpoi_obj->save();
@@ -140,19 +160,23 @@ class CommonController extends Controller
             $num_padded = sprintf("%03d", 1);
             if($project_type == "Architecture")
             {
-                $enquiry_number = "EQ/$year-$nxt_yr/AR/$num_padded";
+                $enquiry_number = "EQ/$year/AR/$num_padded";
             }
             elseif($project_type == "Interior")
             {
-                $enquiry_number = "EQ/$year-$nxt_yr/IN/$num_padded";
+                $enquiry_number = "EQ/$year/IN/$num_padded";
             }
             elseif($project_type == "Landscape")
             {
-                $enquiry_number = "EQ/$year-$nxt_yr/LA/$num_padded";
+                $enquiry_number = "EQ/$year/LA/$num_padded";
             }
             elseif($project_type == "Sustainable")
             {
-                $enquiry_number = "EQ/$year-$nxt_yr/SA/$num_padded";
+                $enquiry_number = "EQ/$year/SA/$num_padded";
+            }
+            elseif($project_type == "Urban Design")
+            {
+                $enquiry_number = "EQ/$year/UD/$num_padded";
             }
 
         }
@@ -162,7 +186,7 @@ class CommonController extends Controller
 
     static function custConvNumber($project_type)
     {
-        $conv_obj=ConveretedAutoValuesModel::select('id','architecture_no','interior_no','landscape_no','sustainable_no','cur_yr','nxt_yr')->orderby('id','desc')->first();
+        $conv_obj=ConveretedAutoValuesModel::select('id','architecture_no','interior_no','landscape_no','sustainable_no','urbandes_no','cur_yr','nxt_yr')->orderby('id','desc')->first();
         $converted_number;
         if($conv_obj){
 
@@ -189,6 +213,11 @@ class CommonController extends Controller
                 {
                     $cpoi_obj->sustainable_no=1;
                 }
+                elseif($project_type == "Urban Design")
+                {
+                    $cpoi_obj->urbandes_no=1;
+                }
+
                 $cpoi_obj->cur_yr=$year;
                 $cpoi_obj->nxt_yr=$nxt_yr;
                 $res=$cpoi_obj->update();
@@ -197,19 +226,23 @@ class CommonController extends Controller
                 //change on project type
                 if($project_type == "Architecture")
                 {
-                    $converted_number = "ADS/$year-$nxt_yr/AR/$num_padded";
+                    $converted_number = "ADS/$year/AR/$num_padded";
                 }
                 elseif($project_type == "Interior")
                 {
-                    $converted_number = "ADS/$year-$nxt_yr/IN/$num_padded";
+                    $converted_number = "ADS/$year/IN/$num_padded";
                 }
                 elseif($project_type == "Landscape")
                 {
-                    $converted_number = "ADS/$year-$nxt_yr/LA/$num_padded";
+                    $converted_number = "ADS/$year/LA/$num_padded";
                 }
                 elseif($project_type == "Sustainable")
                 {
-                    $converted_number = "ADS/$year-$nxt_yr/SA/$num_padded";
+                    $converted_number = "ADS/$year/SA/$num_padded";
+                }
+                elseif($project_type == "Urban Design")
+                {
+                    $converted_number = "ADS/$year/UD/$num_padded";
                 }
                 
 
@@ -233,6 +266,10 @@ class CommonController extends Controller
                 {
                     $cpoi_obj->sustainable_no= ($conv_obj->sustainable_no) + 1;
                 }
+                elseif($project_type == "Urban Design")
+                {
+                    $cpoi_obj->urbandes_no= ($conv_obj->urbandes_no) + 1;
+                }
                 $res=$cpoi_obj->update();
 
 
@@ -241,24 +278,28 @@ class CommonController extends Controller
                 if($project_type == "Architecture")
                 {
                     $num_padded = sprintf("%03d", (($conv_obj->architecture_no) + 1));
-                    $converted_number = "ADS/$year-$nxt_yr/AR/$num_padded";
+                    $converted_number = "ADS/$year/AR/$num_padded";
                 }
                 elseif($project_type == "Interior")
                 {
                     $num_padded = sprintf("%03d", (($conv_obj->interior_no) + 1));
-                    $converted_number = "ADS/$year-$nxt_yr/IN/$num_padded";
+                    $converted_number = "ADS/$year/IN/$num_padded";
                 }
                 elseif($project_type == "Landscape")
                 {
                     $num_padded = sprintf("%03d", (($conv_obj->landscape_no) + 1));
-                    $converted_number = "ADS/$year-$nxt_yr/LA/$num_padded";
+                    $converted_number = "ADS/$year/LA/$num_padded";
                 }
                 elseif($project_type == "Sustainable")
                 {
                     $num_padded = sprintf("%03d", (($conv_obj->sustainable_no) + 1));
-                    $converted_number = "ADS/$year-$nxt_yr/SA/$num_padded";
+                    $converted_number = "ADS/$year/SA/$num_padded";
                 }
-
+                elseif($project_type == "Urban Design")
+                {
+                    $num_padded = sprintf("%03d", (($conv_obj->urbandes_no) + 1));
+                    $converted_number = "ADS/$year/UD/$num_padded";
+                }
                 
                 
             }
@@ -285,6 +326,11 @@ class CommonController extends Controller
             {
                 $cpoi_obj->sustainable_no=1;
             }
+            elseif($project_type == "Urban Design")
+            {
+                $cpoi_obj->urbandes_no=1;
+            }
+
             $cpoi_obj->cur_yr=$year;
             $cpoi_obj->nxt_yr=$nxt_yr;
             $res=$cpoi_obj->save();
@@ -292,19 +338,23 @@ class CommonController extends Controller
             $num_padded = sprintf("%03d", 1);
             if($project_type == "Architecture")
             {
-                $converted_number = "ADS/$year-$nxt_yr/AR/$num_padded";
+                $converted_number = "ADS/$year/AR/$num_padded";
             }
             elseif($project_type == "Interior")
             {
-                $converted_number = "ADS/$year-$nxt_yr/IN/$num_padded";
+                $converted_number = "ADS/$year/IN/$num_padded";
             }
             elseif($project_type == "Landscape")
             {
-                $converted_number = "ADS/$year-$nxt_yr/LA/$num_padded";
+                $converted_number = "ADS/$year/LA/$num_padded";
             }
             elseif($project_type == "Sustainable")
             {
-                $converted_number = "ADS/$year-$nxt_yr/SA/$num_padded";
+                $converted_number = "ADS/$year/SA/$num_padded";
+            }
+            elseif($project_type == "Urban Design")
+            {
+                $converted_number = "ADS/$year/UD/$num_padded";
             }
 
         }

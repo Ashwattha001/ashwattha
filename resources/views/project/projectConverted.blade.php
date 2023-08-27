@@ -319,7 +319,7 @@
                                                 <th scope="col" style="width: 100px">Project Type</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="sa_records">
+                                        <tbody id="ud_records">
                                            
                                         </tbody>
                                     </table>
