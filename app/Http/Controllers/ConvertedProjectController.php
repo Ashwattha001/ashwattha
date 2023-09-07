@@ -107,7 +107,10 @@ class ConvertedProjectController extends Controller
 
         $pr_head_working = $req->get('pr_head_working');                  // Project Head working
         $team_member_working = $req->get('team_member_working');          // Team Member working
-        $team_member_working=implode(',',$team_member_working);           // Team Member working store comma separated
+        if($team_member_working != ""){
+            $team_member_working=implode(',',$team_member_working);           // Team Member working store comma separated
+
+        }
 
         $supervisor = $req->get('supervisor');                                  // Supervisor
         $site_supervisor=implode(',',$supervisor);                              // Supervisor store comma separated

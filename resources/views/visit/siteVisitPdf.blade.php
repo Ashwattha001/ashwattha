@@ -68,16 +68,16 @@
         <tr  style="border-bottom: none; border-top: none;">
             <td style="width:px;"  colspan="2"> Project Title : <br/> <b>{{$sv_obj[0]->project_name}} </b></td>
             <td style="width:px;" colspan="2"> Name Of Contractor : <br/> <b>{{$sv_obj[0]->contractor}} </b></td>
-            <td style="width:px;"> Site Visit No : <br/> <b> </b></td>
+            <td style="width:px;"> Site Visit No : <br/> <b>{{$sv_obj[0]->visit_count}}</b></td>
 
             <!-- <td style="width:px;"> Stage Of Construction :<br/> <b>  </b></td> -->
             <!-- <td style="width:px;"> Site Visit Done by :<br/> <b>  </b></td> -->
         </tr>
         <tr style="border-bottom: none; border-top: none;">
-            <td style="width:px;"> Stage Of Construction :<br/> <b>{{$sv_obj[0]->stage_contr}}  </b></td>
-            <td style="width:px;" > Site Visit Done by :<br/> <b>{{$sv_obj[0]->name}}  </b></td>
-            <td style="width:px;"> Date : <br/> <b> {{$sv_obj[0]->vdate}} </b></td>
-            <td style="width:px;" colspan="2"> <br/> <b>  </b></td>
+            <td style="width:150px;"> Stage Of Construction :<br/> <b>{{$sv_obj[0]->stage_contr}}  </b></td>
+            <td style="width:150px;" > Site Visit Done by :<br/> <b>{{$sv_obj[0]->name}}  </b></td>
+            <td style="width:px;" colspan="2"> Attendees :<br/> <b>{{$sv_obj[0]->attendees}}</b></td>
+            <td style="width:100px;"> Date : <br/> <b> {{$sv_obj[0]->vdate}} </b></td>
             
         </tr>
         

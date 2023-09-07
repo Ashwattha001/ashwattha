@@ -152,7 +152,7 @@ $roles=Session::get('ROLES');
                                                                    Project Head
                                                                 @endif
                                                                 @if($u->role == 2)
-                                                                    Employee
+                                                                    Team Member
                                                                 @endif
                                                                 @if($u->role == 3)
                                                                     Site Supervisors/ Engineers
@@ -230,8 +230,8 @@ $roles=Session::get('ROLES');
                                                 @if($roles==0)
                                                     <option value="" selected disabled>Select</option>
                                                     <option value="0">Super Admin</option>
-                                                    <option value="1">Peoject Head</option>
-                                                    <option value="2">Employee</option>
+                                                    <option value="1">Project Head</option>
+                                                    <option value="2">Team Member</option>
                                                     <option value="3">Site Supervisors</option>
                                                 @endif
                                             </select>
@@ -250,7 +250,7 @@ $roles=Session::get('ROLES');
                                     <div class="col-md-3">
                                         <div class="form-floating mb-3">
                                             <input type="file" class="form-control" id="photo_file" placeholder="photo File" name="photo_file">
-                                            <label for="photo_file">User Photo<sup class="text-danger">*</sup></label>
+                                            <label for="photo_file">User Photo</label>
                                             <a href="" id="photo_file1" target="_blank"><i class="fa fa-eye"></i> View Previous File</a>
                                             <span class="text-danger error" id="uperror"></span>
                                         </div>
@@ -448,10 +448,10 @@ $("#mobile").keypress(function (e) {
 
 $(document).on("click",'.delU',function()
 {
-        var id = $(this).data('id');
-        $('#id').val(id);
-        // $('#delete_record_modal form').attr("action","user_del/"+id);
-        $('#delete_record_modal').modal('show');
+    var id = $(this).data('id');
+    $('#id').val(id);
+    // $('#delete_record_modal form').attr("action","user_del/"+id);
+    $('#delete_record_modal').modal('show');
 });
 
 $('.nav-tabs a[href="#profile1"]').click(function(){
@@ -467,9 +467,7 @@ $('.nav-tabs a[href="#profile1"]').click(function(){
 
 $(document).on("click",'.editU',function()
 {
-    $('#pan_file1').show();
-    $('#aadhar_file1').show();
-    $('#photo_file1').show();
+
     var id = $(this).data('id');
     var name = $(this).data('name');
     var mobile_no = $(this).data('mobile');
@@ -480,6 +478,16 @@ $(document).on("click",'.editU',function()
     var pan_file = $(this).data('pan_file');
     var aadhar_file = $(this).data('aadhar_file');
     var photo_file = $(this).data('photo_file');
+
+    if(pan_file != ""){
+        $('#pan_file1').show();
+    }
+    if(aadhar_file != ""){
+        $('#aadhar_file1').show();
+    }
+    if(photo_file != ""){
+        $('#photo_file1').show();
+    }
     // alert(pan_file);
     var  pan_file="files/user/"+pan_file;
     var  aadhar_file="files/user/"+aadhar_file;
@@ -598,20 +606,19 @@ $(document).on("click",'#del_rec',function()
                             
                             content +="<tr>";
                             content +="<td>"+ ++i  +"</td>";
-                            content +="<td>"+row.emp_number+"</td>";
-                            
+                           
                             content +="<td><h5 class='text-truncate font-size-14'>"+row.name+"";
                                     if(row.role== 0){
                                         content +="<small class='text-muted mb-0' style='white-space: normal;'>(SUPER ADMIN)</small></h5>"
                                     }
                                     if(row.role== 1){
-                                        content +="<small class='text-muted mb-0' style='white-space: normal;'>(ADMIN)</small></h5>"
+                                        content +="<small class='text-muted mb-0' style='white-space: normal;'>(Project Head)</small></h5>"
                                     }
                                     if(row.role== 2){
-                                        content +="<small class='text-muted mb-0' style='white-space: normal;'>(ACCOUNTANT)</small></h5>"
+                                        content +="<small class='text-muted mb-0' style='white-space: normal;'>(Team Member)</small></h5>"
                                     }
                                     if(row.role== 3){
-                                        content +="<small class='text-muted mb-0' style='white-space: normal;'>(TECHNICIAN)</small></h5>"
+                                        content +="<small class='text-muted mb-0' style='white-space: normal;'>(Site Supervisors/ Engineers)</small></h5>"
 
                                     }
                             content += "</td>";
@@ -623,7 +630,7 @@ $(document).on("click",'#del_rec',function()
                                 }else{
                                     content += "<input class='form-check-input' type='checkbox' id='is_active' data-id='"+row.id+"'><label class='form-check-label' for='is_active'></label></div> "
                                 }
-                            content += "<button class='btn btn-outline-secondary btn-sm resPass' rel='tooltip' data-bs-placement='top' title='Reset Password' data-id='"+row.id+"' data-name='"+row.name+"' data-emp_number='"+row.emp_number+"'><i class='fas fa-undo-alt'></i></button> </td>";
+                            content += "<button class='btn btn-outline-secondary btn-sm resPass' rel='tooltip' data-bs-placement='top' title='Reset Password' data-id='"+row.id+"' data-name='"+row.name+"'><i class='fas fa-undo-alt'></i></button> </td>";
 
                             content +="<td> <div class='dropdown'><a href='#' class='dropdown-toggle card-drop' data-bs-toggle='dropdown' aria-expanded='false'><i class='mdi mdi-dots-horizontal font-size-18'></i></a><div class='dropdown-menu' style='min-width: 6rem !important;'><a class='dropdown-item editU' href='javascript:void(0);' data-id='"+row.id+"' data-name='"+row.name+"' data-mobile='"+row.mobile+"' data-email='"+row.email+"' data-status='"+row.status+"' data-role='"+row.role+"' data-pan_number='"+row.pan_number+"' data-aadhar_number='"+row.aadhar_number+"' data-pan_file='"+row.pan_file+"' data-aadhar_file='"+row.aadhar_file+"' data-photo_file='"+row.photo_file+"'>Edit</a><a class='dropdown-item delU'  href='javascript:void(0);' data-id='"+row.id+"'>Delete</a> </div></div></td>";
                             content += "</tr>";

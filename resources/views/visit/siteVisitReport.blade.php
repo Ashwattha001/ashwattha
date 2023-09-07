@@ -104,31 +104,31 @@
                             <li class="nav-item">
                                 <a class="nav-link active" data-bs-toggle="tab" href="#ar_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Architecture List</span> 
+                                    <span class="d-none d-sm-block">Architecture</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#in_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Interior List</span> 
+                                    <span class="d-none d-sm-block">Interior</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#la_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Landscape List</span> 
+                                    <span class="d-none d-sm-block">Landscape</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#sa_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Sustainable List</span> 
+                                    <span class="d-none d-sm-block">Sustainable</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#ud_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Urban Design List</span> 
+                                    <span class="d-none d-sm-block">Urban Design</span> 
                                 </a>
                             </li>
                         </ul>
@@ -146,6 +146,7 @@
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Contractor</th>
                                                 <th scope="col" style="width: 100px">Stage of Construction</th>
+                                                <th scope="col" style="width: 100px">Attendees</th>
 
                                             </tr>
                                         </thead>
@@ -167,7 +168,7 @@
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Contractor</th>
                                                 <th scope="col" style="width: 100px">Stage of Construction</th>
-
+                                                <th scope="col" style="width: 100px">Attendees</th>
                                             </tr>
                                         </thead>
                                         <tbody id="in_records">
@@ -188,6 +189,7 @@
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Contractor</th>
                                                 <th scope="col" style="width: 100px">Stage of Construction</th>
+                                                <th scope="col" style="width: 100px">Attendees</th>
 
                                             </tr>
                                         </thead>
@@ -209,6 +211,7 @@
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Contractor</th>
                                                 <th scope="col" style="width: 100px">Stage of Construction</th>
+                                                <th scope="col" style="width: 100px">Attendees</th>
 
                                             </tr>
                                         </thead>
@@ -230,6 +233,7 @@
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Contractor</th>
                                                 <th scope="col" style="width: 100px">Stage of Construction</th>
+                                                <th scope="col" style="width: 100px">Attendees</th>
 
                                             </tr>
                                         </thead>
@@ -275,6 +279,7 @@
                                     <option value="Interior">Interior</option>
                                     <option value="Landscape">Landscape</option>
                                     <option value="Sustainable">Sustainable</option>
+                                    <option value="Urban Design">Urban Design</option>
                             </select>
                             <span class="text-danger error" id="pterror"></span>
                         </div>
@@ -292,11 +297,20 @@
 
                     <div class="col-md-12 col-sm-12 col-lg-12">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="stage_contr" placeholder="Enter Project Name" name="stage_contr" required onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
+                            <input type="text" class="form-control" id="stage_contr" placeholder="Enter Stage of Construction" name="stage_contr" required onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
                             <label for="stage_contr">Stage of Construction<sup class="text-danger">*</sup></label>
                             <span class="text-danger error" id="scerror"></span>
                         </div>
                     </div>
+
+                    <div class="col-md-12 col-sm-12 col-lg-12">
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="attendees" placeholder="Enter Attendees" name="attendees" required onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
+                            <label for="attendees">Attendees</label>
+                            <span class="text-danger error" id="aterror"></span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             
@@ -342,71 +356,7 @@
 
     var $body = $("body");
 
-    //For set/unset select field
-    $('.nav-tabs a[href="#ar_list"]').click(function()
-    {
-        // $('#task_project,#team_member').empty();
-        // $("#task_status").val("").trigger("change"); 
-        // $("#project_type").val("").trigger("change");   
-        // $('.task_project').show();
-        // $('.project_name').hide();
-        // $('#project_type,#team_member').prop('disabled', false);
-        getVisits();
-
-    });
-
-    //For set/unset select field
-    $('.nav-tabs a[href="#in_list"]').click(function()
-    {
-        // $('#task_project,#team_member').empty();
-        // $("#task_status").val("").trigger("change"); 
-        // $("#project_type").val("").trigger("change");  
-        // $('.task_project').show();
-        // $('.project_name').hide(); 
-        // $('#project_type,#team_member').prop('disabled', false);
-
-        getVisits();
-    });
-
-    //For set/unset select field
-    $('.nav-tabs a[href="#la_list"]').click(function()
-    {
-        // $('#task_project,#team_member').empty();
-        // $("#task_status").val("").trigger("change"); 
-        // $("#project_type").val("").trigger("change");
-        // $('.task_project').show();
-        // $('.project_name').hide();   
-        // $('#project_type,#team_member').prop('disabled', false);
-
-        getVisits();
-    });
-
-    //For set/unset select field
-    $('.nav-tabs a[href="#sa_list"]').click(function()
-    {
-        // $('#task_project,#team_member').empty();
-        // $("#task_status").val("").trigger("change"); 
-        // $("#project_type").val("").trigger("change");  
-        // $('.task_project').show();
-        // $('.project_name').hide();
-        // $('#project_type,#team_member').prop('disabled', false);
-
-        getVisits();
-    });
-
-    //For set/unset select field
-    $('.nav-tabs a[href="#ud_list"]').click(function()
-    {
-        // $('#pr_head_conceptual,#team_member_conceptual,#pr_head_working,#team_member_working,#supervisor').empty();
-        // $("#enq_status").val("").trigger("change"); 
-        // $("#project_type").val("").trigger("change"); 
-        // $('.project_fields').hide();
-        // $('.task_project').show();
-        // $('.project_name').hide();
-        // $('#project_type,#team_member').prop('disabled', false);
-
-        getVisits();
-    });
+   
 
     getVisits();
     function getVisits(){
@@ -437,12 +387,25 @@
                 var i=j=k=l=m=0;        
                      
                 $.each(data.data,function(index,row){
+                    //date convert into dd/mm/yyyy
+                    function formatDate (input) {
+                        var datePart = input.match(/\d+/g),
+                        year = datePart[0].substring(0), // get only two digits
+                        month = datePart[1], day = datePart[2];
+                        return day+'-'+month+'-'+year;
+                    }
+
+                    if(row.visit_date != null){
+                        var visit_date = formatDate (row.visit_date); // "18/01/10"
+                    }else{
+                        var visit_date = " - "
+                    }
              
                     if(row.project_type == "Architecture")
                     {
                         content +="<tr>";
                         content +="<td>"+ ++i  +"</td>";
-                        content +="<td>"+row.visit_date+"</td>";
+                        content +="<td>"+visit_date+"</td>";
                         
                         content +="<td>";
                             content +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-visit_date='"+row.visit_date+"' data-pr_id='"+row.pr_id+"' data-project_type='"+row.project_type+"' data-stage_contr='"+row.stage_contr+"' href='edit_visit/"+row.id+"'><i class='far fa-edit'></i></a> ";
@@ -453,8 +416,19 @@
                         content += "</td>";
                         content +="<td>"+row.name+"</td>";
                         content +="<td>"+row.project_name+"</td>";
-                        content +="<td>"+row.contractor+"</td>";
+                        if(row.contractor != null){
+                            content +="<td>"+row.contractor+"</td>";
+                        }else{
+                            content +="<td>-</td>";
+                        }
+
                         content +="<td>"+row.stage_contr+"</td>";
+                        if(row.attendees != null){
+                            content +="<td>"+row.attendees+"</td>";
+                        }else{
+                            content +="<td>-</td>";
+                        }
+
                         content += "</tr>";
 
                     }
@@ -463,7 +437,7 @@
                     {
                         content1 +="<tr>";
                         content1 +="<td>"+ ++i  +"</td>";
-                        content1 +="<td>"+row.visit_date+"</td>";
+                        content1 +="<td>"+visit_date+"</td>";
                         
                         content1 +="<td>";
                             content1 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-visit_date='"+row.visit_date+"' data-pr_id='"+row.pr_id+"' data-project_type='"+row.project_type+"' data-stage_contr='"+row.stage_contr+"' href='edit_visit/"+row.id+"'><i class='far fa-edit'></i></a> ";
@@ -474,8 +448,17 @@
                         content1 += "</td>";
                         content1 +="<td>"+row.name+"</td>";
                         content1 +="<td>"+row.project_name+"</td>";
-                        content1 +="<td>"+row.contractor+"</td>";
+                        if(row.contractor != null){
+                            content1 +="<td>"+row.contractor+"</td>";
+                        }else{
+                            content1 +="<td>-</td>";
+                        }
                         content1 +="<td>"+row.stage_contr+"</td>";
+                        if(row.attendees != null){
+                            content1 +="<td>"+row.attendees+"</td>";
+                        }else{
+                            content1 +="<td>-</td>";
+                        }
                         content1 += "</tr>";
 
                         
@@ -485,7 +468,7 @@
                     {
                         content2 +="<tr>";
                         content2 +="<td>"+ ++i  +"</td>";
-                        content2 +="<td>"+row.visit_date+"</td>";
+                        content2 +="<td>"+visit_date+"</td>";
                         
                         content2 +="<td>";
                             content2 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-visit_date='"+row.visit_date+"' data-pr_id='"+row.pr_id+"' data-project_type='"+row.project_type+"' data-stage_contr='"+row.stage_contr+"' href='edit_visit/"+row.id+"'><i class='far fa-edit'></i></a> ";
@@ -496,8 +479,18 @@
                         content2 += "</td>";
                         content2 +="<td>"+row.name+"</td>";
                         content2 +="<td>"+row.project_name+"</td>";
-                        content2 +="<td>"+row.contractor+"</td>";
+                        if(row.contractor != null){
+                            content2 +="<td>"+row.contractor+"</td>";
+                        }else{
+                            content2 +="<td>-</td>";
+                        }
                         content2 +="<td>"+row.stage_contr+"</td>";
+                        if(row.attendees != null){
+                            content2 +="<td>"+row.attendees+"</td>";
+                        }else{
+                            content2 +="<td>-</td>";
+                        }
+               
                         content2 += "</tr>";
 
                         
@@ -507,7 +500,7 @@
                     {
                         content3 +="<tr>";
                         content3 +="<td>"+ ++i  +"</td>";
-                        content3 +="<td>"+row.visit_date+"</td>";
+                        content3 +="<td>"+visit_date+"</td>";
                         
                         content3 +="<td>";
                             content3 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-visit_date='"+row.visit_date+"' data-pr_id='"+row.pr_id+"' data-project_type='"+row.project_type+"' data-stage_contr='"+row.stage_contr+"' href='edit_visit/"+row.id+"'><i class='far fa-edit'></i></a> ";
@@ -518,8 +511,17 @@
                         content3 += "</td>";
                         content3 +="<td>"+row.name+"</td>";
                         content3 +="<td>"+row.project_name+"</td>";
-                        content3 +="<td>"+row.contractor+"</td>";
+                        if(row.contractor != null){
+                            content3 +="<td>"+row.contractor+"</td>";
+                        }else{
+                            content3 +="<td>-</td>";
+                        }
                         content3 +="<td>"+row.stage_contr+"</td>";
+                        if(row.attendees != null){
+                            content3 +="<td>"+row.attendees+"</td>";
+                        }else{
+                            content3 +="<td>-</td>";
+                        }
                         content3 += "</tr>";
 
                         
@@ -529,7 +531,7 @@
                     {
                         content4 +="<tr>";
                         content4 +="<td>"+ ++i  +"</td>";
-                        content4 +="<td>"+row.visit_date+"</td>";
+                        content4 +="<td>"+visit_date+"</td>";
                         
                         content4 +="<td>";
                             content4 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-visit_date='"+row.visit_date+"' data-pr_id='"+row.pr_id+"' data-project_type='"+row.project_type+"' data-stage_contr='"+row.stage_contr+"' href='edit_visit/"+row.id+"'><i class='far fa-edit'></i></a> ";
@@ -540,8 +542,17 @@
                         content4 += "</td>";
                         content4 +="<td>"+row.name+"</td>";
                         content4 +="<td>"+row.project_name+"</td>";
-                        content4 +="<td>"+row.contractor+"</td>";
+                        if(row.contractor != null){
+                            content4 +="<td>"+row.contractor+"</td>";
+                        }else{
+                            content4 +="<td>-</td>";
+                        }
                         content4 +="<td>"+row.stage_contr+"</td>";
+                        if(row.attendees != null){
+                            content4 +="<td>"+row.attendees+"</td>";
+                        }else{
+                            content4 +="<td>-</td>";
+                        }
                         content4 += "</tr>";
 
                         
@@ -568,6 +579,35 @@
         });
     }
 
+    //For set/unset select field
+    $('.nav-tabs a[href="#ar_list"]').click(function()
+    {
+        getVisits();
+    });
+
+    //For set/unset select field
+    $('.nav-tabs a[href="#in_list"]').click(function()
+    {
+        getVisits();
+    });
+
+    //For set/unset select field
+    $('.nav-tabs a[href="#la_list"]').click(function()
+    {
+        getVisits();
+    });
+
+    //For set/unset select field
+    $('.nav-tabs a[href="#sa_list"]').click(function()
+    {
+        getVisits();
+    });
+
+    //For set/unset select field
+    $('.nav-tabs a[href="#ud_list"]').click(function()
+    {
+        getVisits();
+    });
 
     // get projects from project type wise
     $('#project_type').change(function(e)
@@ -593,7 +633,7 @@
                 $.each(response.data,function(index,row){
 
                     //get project type wise project records
-                    $('#pr_id').append("<option value='"+row.id+"'>"+row.enquiry_no+" ("+row.project_name+")</option>");
+                    $('#pr_id').append("<option value='"+row.id+"'>"+row.converted_no+" ("+row.project_name+")</option>");
                                     
                 });
             },

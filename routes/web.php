@@ -10,6 +10,8 @@ use App\Http\Controllers\ProjectEnquiryController;
 use App\Http\Controllers\ConvertedProjectController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\VisitController;
+use App\Http\Controllers\CalendarController;
+
 
 
 
@@ -25,12 +27,14 @@ use App\Http\Controllers\VisitController;
 */
 
 Route::get('/', [LoginController::class, 'login'])->name('login.page');
+Route::get('/dashboard', [LoginController::class, 'index'])->name('dashboard');
+Route::get('/get_schedules', [CalendarController::class, 'getSchedules']);
 
 Route::post('/checkLogin', [LoginController::class, 'check_login']);
 Route::group(['middleware' => 'login'], function () 
 {
     // DASHBOARD
-    Route::get('/dashboard', [LoginController::class, 'index'])->name('dashboard');
+    // Route::get('/dashboard', [LoginController::class, 'index'])->name('dashboard');
 
     Route::get('/logout', function(){
 
@@ -110,4 +114,8 @@ Route::group(['middleware' => 'login'], function ()
     Route::get('/get-istructions', [VisitController::class, 'getInstructions']);
     Route::get('/delete-instruc', [VisitController::class, 'deleteInstruc']);
     Route::post('/generate_visit_pdf/{id}', [VisitController::class, 'generateVisitPDF']);
+
+    Route::post('/create_schedule', [CalendarController::class, 'createSchedule']);  
+    // Route::get('/get_schedules', [CalendarController::class, 'getSchedules']);
+
 }); 

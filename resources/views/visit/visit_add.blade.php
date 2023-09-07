@@ -109,7 +109,7 @@
                                         <th class="align-middle">#</th>
                                         <th class="align-middle">Date</th>
                                         <th class="align-middle">Instructions</th>
-                                        <th class="align-middle">Action Required Form</th>
+                                        <th class="align-middle">Action Required From</th>
                                         <th class="align-middle">Instructions Provided by</th>
                                         <th class="align-middle">Action</th>
                                     </tr>
@@ -185,8 +185,8 @@
                     </div>
                     <div class="col-md-6 col-sm-12 col-lg-6">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="act_req_form" placeholder="Action Required Form" name="act_req_form" maxlength="100" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);">
-                            <label for="act_req_form">Action Required Form</label>
+                            <input type="text" class="form-control" id="act_req_form" placeholder="Action Required From" name="act_req_form" maxlength="100" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);">
+                            <label for="act_req_form">Action Required From</label>
                             <span class="text-danger error" id="aerror"></span>
                         </div>
                     </div>

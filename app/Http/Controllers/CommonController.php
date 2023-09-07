@@ -129,7 +129,7 @@ class CommonController extends Controller
         }else{
 
             // DATABSE START
-            $year = date("y"); 
+            $year = date("Y"); 
             //insert new value
             $nxt_yr = $year+1;
             $cpoi_obj= new AutoValuesModel();
@@ -190,7 +190,7 @@ class CommonController extends Controller
         $converted_number;
         if($conv_obj){
 
-            $day = date("d"); $month = date("m"); $year = date("y"); 
+            $day = date("d"); $month = date("m"); $year = date("Y"); 
 
             if( ($day == '01') && ($month == '04') && ($conv_obj->nxt_yr == $year) ){
                 
@@ -301,12 +301,12 @@ class CommonController extends Controller
                     $converted_number = "ADS/$year/UD/$num_padded";
                 }
                 
-                
             }
+
         }else{
 
             // DATABSE START
-            $year = date("y"); 
+            $year = date("Y"); 
             //insert new value
             $nxt_yr = $year+1;
             $cpoi_obj= new ConveretedAutoValuesModel();

@@ -35,7 +35,9 @@
     {
         display: inline-block;
     }
-
+    .dtr-title{
+        font-weight: 600;
+    }
     /** SPINNER CREATION **/
 
     .loader {
@@ -105,31 +107,31 @@
                             <li class="nav-item">
                                 <a class="nav-link active" data-bs-toggle="tab" href="#ar_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Architecture List</span> 
+                                    <span class="d-none d-sm-block">Architecture</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#in_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Interior List</span> 
+                                    <span class="d-none d-sm-block">Interior</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#la_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Landscape List</span> 
+                                    <span class="d-none d-sm-block">Landscape</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#sa_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Sustainable List</span> 
+                                    <span class="d-none d-sm-block">Sustainable</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#ud_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Urban Design List</span> 
+                                    <span class="d-none d-sm-block">Urban Design</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -151,7 +153,7 @@
                                                 <th scope="col">Action</th>
                                                 <th scope="col" style="width: 100px">Status</th>
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
-                                                <th scope="col" style="width: 100px">Project Admin (Conceptual)</th>
+                                                <th scope="col" style="width: 100px">Project Head (Conceptual)</th>
                                                 <th scope="col" style="width: 100px">Team Member (Conceptual) </th>
                                                 <th scope="col" style="width: 100px">Supervisor</th>
                                                 <th scope="col" style="width: 100px">Client Name </th>
@@ -179,7 +181,7 @@
                                                 <th scope="col">Action</th>
                                                 <th scope="col" style="width: 100px">Status</th>
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
-                                                <th scope="col" style="width: 100px">Project Admin (Conceptual)</th>
+                                                <th scope="col" style="width: 100px">Project Head (Conceptual)</th>
                                                 <th scope="col" style="width: 100px">Team Member (Conceptual) </th>
                                                 <th scope="col" style="width: 100px">Supervisor</th>
                                                 <th scope="col" style="width: 100px">Client Name </th>
@@ -207,7 +209,7 @@
                                                 <th scope="col">Action</th>
                                                 <th scope="col" style="width: 100px">Status</th>
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
-                                                <th scope="col" style="width: 100px">Project Admin (Conceptual)</th>
+                                                <th scope="col" style="width: 100px">Project Head (Conceptual)</th>
                                                 <th scope="col" style="width: 100px">Team Member (Conceptual) </th>
                                                 <th scope="col" style="width: 100px">Supervisor</th>
                                                 <th scope="col" style="width: 100px">Client Name </th>
@@ -235,7 +237,7 @@
                                                 <th scope="col">Action</th>
                                                 <th scope="col" style="width: 100px">Status</th>
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
-                                                <th scope="col" style="width: 100px">Project Admin (Conceptual)</th>
+                                                <th scope="col" style="width: 100px">Project Head (Conceptual)</th>
                                                 <th scope="col" style="width: 100px">Team Member (Conceptual) </th>
                                                 <th scope="col" style="width: 100px">Supervisor</th>
                                                 <th scope="col" style="width: 100px">Client Name </th>
@@ -263,7 +265,7 @@
                                                 <th scope="col">Action</th>
                                                 <th scope="col" style="width: 100px">Status</th>
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
-                                                <th scope="col" style="width: 100px">Project Admin (Conceptual)</th>
+                                                <th scope="col" style="width: 100px">Project Head (Conceptual)</th>
                                                 <th scope="col" style="width: 100px">Team Member (Conceptual) </th>
                                                 <th scope="col" style="width: 100px">Supervisor</th>
                                                 <th scope="col" style="width: 100px">Client Name </th>
@@ -342,8 +344,8 @@
                                         </div>
                                         <div class="col-md-5 col-sm-12 col-lg-5 col-sm-12">
                                             <div class="form-floating mb-3">
-                                                <textarea class="form-control" id="project_address" required name="project_address" placeholder="Enter Address" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="100"></textarea>
-                                                <label for="project_address">Project Address<sup class="text-danger">*</sup></label>
+                                                <textarea class="form-control" id="project_address" name="project_address" placeholder="Enter Address" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="100"></textarea>
+                                                <label for="project_address">Project Address</label>
                                                 <span class="text-danger error" id="paerror"></span>
 
                                             </div>
@@ -351,8 +353,8 @@
                                        
                                         <div class="col-md-5 col-sm-12 col-lg-5 col-sm-12">
                                             <div class="form-floating mb-3">
-                                                <textarea class="form-control" id="client_document" required name="client_document" placeholder="Enter Address" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="100"></textarea>
-                                                <label for="address">Client Documents<sup class="text-danger">*</sup></label>
+                                                <textarea class="form-control" id="client_document" name="client_document" placeholder="Enter Address" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="100"></textarea>
+                                                <label for="address">Client Documents</label>
                                                 <span class="text-danger error" id="cderror"></span>
 
                                             </div>
@@ -445,62 +447,6 @@
 
     var $body = $("body");
 
-    $('.nav-tabs a[href="#update_enquiry"]').click(function(){
-       
-        $('.enq_form')[0].reset();
-        $('#edit_id').val('');               
-        $('#pr_head_conceptual,#team_member_conceptual,#supervisor').empty();
-        $("#enq_status").val("").trigger("change"); 
-        $("#project_type").val("").trigger("change"); 
-        getEnq();
-        
-
-    });
-
-    //For set/unset select field
-    $('.nav-tabs a[href="#ar_list"]').click(function()
-    {
-        $('#pr_head_conceptual,#team_member_conceptual,#supervisor').empty();
-        $("#enq_status").val("").trigger("change"); 
-        $("#project_type").val("").trigger("change"); 
-        getEnq();
-    });
-
-    //For set/unset select field
-    $('.nav-tabs a[href="#in_list"]').click(function()
-    {
-        $('#pr_head_conceptual,#team_member_conceptual,#supervisor').empty();
-        $("#enq_status").val("").trigger("change"); 
-        $("#project_type").val("").trigger("change"); 
-        getEnq();
-    });
-
-    //For set/unset select field
-    $('.nav-tabs a[href="#la_list"]').click(function()
-    {
-        $('#pr_head_conceptual,#team_member_conceptual,#supervisor').empty();
-        $("#enq_status").val("").trigger("change"); 
-        $("#project_type").val("").trigger("change"); 
-        getEnq();
-    });
-
-    //For set/unset select field
-    $('.nav-tabs a[href="#sa_list"]').click(function()
-    {
-        $('#pr_head_conceptual,#team_member_conceptual,#supervisor').empty();
-        $("#enq_status").val("").trigger("change"); 
-        $("#project_type").val("").trigger("change"); 
-        getEnq();
-    });
-
-    //For set/unset select field
-    $('.nav-tabs a[href="#ud_list"]').click(function()
-    {
-        $('#pr_head_conceptual,#team_member_conceptual,#supervisor').empty();
-        $("#enq_status").val("").trigger("change"); 
-        $("#project_type").val("").trigger("change"); 
-        getEnq();
-    });
 
     getEnq();
     function getEnq(){
@@ -814,6 +760,62 @@
     }
 
    
+    $('.nav-tabs a[href="#update_enquiry"]').click(function(){
+       
+       $('.enq_form')[0].reset();
+       $('#edit_id').val('');               
+       $('#pr_head_conceptual,#team_member_conceptual,#supervisor').empty();
+       $("#enq_status").val("").trigger("change"); 
+       $("#project_type").val("").trigger("change"); 
+       getEnq();
+       
+
+   });
+
+   //For set/unset select field
+   $('.nav-tabs a[href="#ar_list"]').click(function()
+   {
+       $('#pr_head_conceptual,#team_member_conceptual,#supervisor').empty();
+       $("#enq_status").val("").trigger("change"); 
+       $("#project_type").val("").trigger("change"); 
+       getEnq();
+   });
+
+   //For set/unset select field
+   $('.nav-tabs a[href="#in_list"]').click(function()
+   {
+       $('#pr_head_conceptual,#team_member_conceptual,#supervisor').empty();
+       $("#enq_status").val("").trigger("change"); 
+       $("#project_type").val("").trigger("change"); 
+       getEnq();
+   });
+
+   //For set/unset select field
+   $('.nav-tabs a[href="#la_list"]').click(function()
+   {
+       $('#pr_head_conceptual,#team_member_conceptual,#supervisor').empty();
+       $("#enq_status").val("").trigger("change"); 
+       $("#project_type").val("").trigger("change"); 
+       getEnq();
+   });
+
+   //For set/unset select field
+   $('.nav-tabs a[href="#sa_list"]').click(function()
+   {
+       $('#pr_head_conceptual,#team_member_conceptual,#supervisor').empty();
+       $("#enq_status").val("").trigger("change"); 
+       $("#project_type").val("").trigger("change"); 
+       getEnq();
+   });
+
+   //For set/unset select field
+   $('.nav-tabs a[href="#ud_list"]').click(function()
+   {
+       $('#pr_head_conceptual,#team_member_conceptual,#supervisor').empty();
+       $("#enq_status").val("").trigger("change"); 
+       $("#project_type").val("").trigger("change"); 
+       getEnq();
+   });
 
     // Enq Form Validation
     var n =0;
@@ -888,23 +890,23 @@
             ++n;
         }
 
-        if( $.trim(project_address).length == 0 )
-        {
-            $('#paerror').text('Please Enter Project Address .');
-            event.preventDefault();
-        }else{
-            $('#paerror').text('');
-            ++n;
-        }
+        // if( $.trim(project_address).length == 0 )
+        // {
+        //     $('#paerror').text('Please Enter Project Address .');
+        //     event.preventDefault();
+        // }else{
+        //     $('#paerror').text('');
+        //     ++n;
+        // }
 
-        if( $.trim(client_document).length == 0 )
-        {
-            $('#cderror').text('Please Enter Client Document.');
-            event.preventDefault();
-        }else{
-            $('#cderror').text('');
-            ++n;
-        }
+        // if( $.trim(client_document).length == 0 )
+        // {
+        //     $('#cderror').text('Please Enter Client Document.');
+        //     event.preventDefault();
+        // }else{
+        //     $('#cderror').text('');
+        //     ++n;
+        // }
 
         // if( $.trim(pr_head_conceptual).length == 0 )
         // {
@@ -947,7 +949,7 @@
     $(document).on("click",'#add_enq',function()
     {        
         // alert(n)   ;
-        if(n==9)
+        if(n==7)
         {        
            
             var edit_id= $('#edit_id').val();

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\SiteVisitModel;
 use App\Models\VisitInstructionModel;
+use App\Models\CountSiteVisitModel;
+
 use Session;
 use DB;
 use Hash;
@@ -31,7 +33,7 @@ class VisitController extends Controller
         $data=DB::table('site_visits as sv')
                 ->leftjoin('projects as p','p.id','sv.pr_id')
                 ->leftjoin('users as u','u.id','sv.u_id')
-                ->select('sv.id','sv.project_type','sv.visit_date','sv.pr_id','sv.stage_contr','sv.delete','sv.a_id','p.project_name','p.contractor','u.name')
+                ->select('sv.id','sv.project_type','sv.visit_date','sv.pr_id','sv.stage_contr','sv.attendees','sv.delete','sv.a_id','p.project_name','p.contractor','u.name')
                 ->where(['sv.delete'=>0])
                 ->get();
 
@@ -60,6 +62,8 @@ class VisitController extends Controller
         $project_type=isset($_POST['project_type']) ? $_POST['project_type'] : '';
         $pr_id=isset($_POST['pr_id']) ? $_POST['pr_id'] : '';
         $stage_contr=isset($_POST['stage_contr']) ? $_POST['stage_contr'] : '';
+        $attendees=isset($_POST['attendees']) ? $_POST['attendees'] : '';
+
         // dd($customer_id);
         if($project_type == '' || $pr_id == ''){
             Session::put('ERROR_MESSAGE', 'Please select Project Type & Project.');
@@ -71,12 +75,34 @@ class VisitController extends Controller
         $c_obj->visit_date=$visit_date;
         $c_obj->pr_id=$pr_id;                       // conv project id
         $c_obj->stage_contr=$stage_contr;
+        $c_obj->attendees=$attendees;
         $c_obj->u_id=$a_id;                             // who create first visit entry- user id
         $c_obj->delete=0;
         $c_obj->a_id=$a_id;
         $res=$c_obj->save();
             
         $visit_id=$c_obj->id;
+
+        $visit_count = CountSiteVisitModel::where(['delete'=>0,'pr_id'=>$pr_id])->get();
+        if(count($visit_count) > 0){
+            $csv_obj=CountSiteVisitModel::find($visit_count[0]->id);
+            $csv_obj->project_type=$project_type;
+            $csv_obj->pr_id=$pr_id;                                 // conv project id
+            $csv_obj->visit_count=$visit_count[0]->visit_count+1;   // conv visit
+            $csv_obj->delete=0;
+            $csv_obj->a_id=$a_id;
+            $res=$csv_obj->update();
+        }else{
+            $csv_obj=new CountSiteVisitModel();
+            $csv_obj->project_type=$project_type;
+            $csv_obj->pr_id=$pr_id;                       // conv project id
+            $csv_obj->visit_count="1";
+            $csv_obj->delete=0;
+            $csv_obj->a_id=$a_id;
+            $res=$csv_obj->save();
+        }
+
+       
         
         return redirect()->route('add.visit.instruction',$visit_id);
     }
@@ -102,7 +128,7 @@ class VisitController extends Controller
         $sv_obj=DB::table('site_visits as sv')
                 ->leftjoin('projects as p','p.id','sv.pr_id')
                 ->leftjoin('users as u','u.id','sv.u_id')
-                ->select('sv.id','sv.project_type','sv.visit_date','sv.pr_id','sv.stage_contr','sv.delete','sv.a_id','p.project_name','p.contractor','u.name')
+                ->select('sv.id','sv.project_type','sv.visit_date','sv.pr_id','sv.stage_contr','sv.attendees','sv.delete','sv.a_id','p.project_name','p.contractor','u.name')
                 ->where(['sv.id'=>$visit_id])
                 ->get();
   
@@ -231,19 +257,25 @@ class VisitController extends Controller
         $sv_obj=DB::table('site_visits as sv')
             ->leftjoin('projects as p','p.id','sv.pr_id')
             ->leftjoin('users as u','u.id','sv.u_id')
-            ->select('sv.id','sv.project_type','sv.visit_date','sv.pr_id','sv.stage_contr','sv.delete','sv.a_id','p.project_name','p.contractor','u.name')
+            ->select('sv.id','sv.project_type','sv.visit_date','sv.pr_id','sv.stage_contr','sv.attendees','sv.delete','sv.a_id','p.project_name','p.contractor','u.name')
             ->where(['sv.id'=>$visit_id])
             ->get();
             foreach($sv_obj as $sv)
             {
                 $sv->vdate = date('d-m-Y', strtotime($sv->visit_date));
+                $visit_count = CountSiteVisitModel::where(['delete'=>0,'pr_id'=>$sv->pr_id])->get();
+                foreach($visit_count as $vc)
+                {
+                    $sv->visit_count = $vc->visit_count;
+                }
+
             }
 
         $data=DB::table('visit_instructions as vi')
             ->leftjoin('site_visits as sv','sv.id','vi.site_visit_id')
             ->leftjoin('projects as p','p.id','sv.pr_id')
             ->leftjoin('users as u','u.id','sv.u_id')
-            ->select('vi.id','vi.instr_date','vi.site_visit_id','vi.instructions','vi.act_req_form','vi.delete','sv.project_type','sv.visit_date','sv.pr_id','sv.stage_contr','sv.delete','sv.a_id','p.project_name','p.contractor','u.name')
+            ->select('vi.id','vi.instr_date','vi.site_visit_id','vi.instructions','vi.act_req_form','vi.delete','sv.project_type','sv.visit_date','sv.pr_id','sv.stage_contr','sv.attendees','sv.delete','sv.a_id','p.project_name','p.contractor','u.name')
             ->where(['vi.delete'=>0])
             ->where(['vi.site_visit_id'=>$visit_id])
             ->get();

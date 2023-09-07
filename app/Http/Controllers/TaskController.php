@@ -339,7 +339,7 @@ class TaskController extends Controller
         //get peoject records
         $data=DB::table('projects as pr')
             ->leftjoin('users as u','u.id','pr.a_id')
-            ->select('pr.id','pr.enquiry_no','pr.project_name','pr.client_ph_no','pr.client_name','pr.enq_date','pr.project_type','pr.client_requirement','pr.pr_address','pr.client_document','pr.pr_head_conceptual','pr.team_member_conceptual','pr.site_supervisor','pr.enq_status','pr.a_id','pr.updated_at','pr.delete','pr.enq_status','u.name as name','u.delete as u_delete','u.is_active')
+            ->select('pr.id','pr.enquiry_no','pr.converted_no','pr.project_name','pr.client_ph_no','pr.client_name','pr.enq_date','pr.project_type','pr.client_requirement','pr.pr_address','pr.client_document','pr.pr_head_conceptual','pr.team_member_conceptual','pr.site_supervisor','pr.enq_status','pr.a_id','pr.updated_at','pr.delete','pr.enq_status','u.name as name','u.delete as u_delete','u.is_active')
             ->where(['pr.delete'=>0,'pr.project_type'=>$project_type])
             ->where('enq_status','=',"Converted")
             ->orderby('pr.updated_at','DESC')
@@ -458,7 +458,7 @@ class TaskController extends Controller
 
         if($edit_id!=null)
     	{
-            if($task_date !='' && $task_remark !='' && $task_status !='')  
+            if($task_date !='' && $task_remark !='')  
             {
                 
 

@@ -31,6 +31,9 @@
       min-height: inherit;
       height: auto;
     }
+    .dtr-title{
+        font-weight: 600;
+    }
     .form-check
     {
         display: inline-block;
@@ -109,31 +112,31 @@
                             <li class="nav-item">
                                 <a class="nav-link active" data-bs-toggle="tab" href="#ar_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Architecture List</span> 
+                                    <span class="d-none d-sm-block">Architecture</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#in_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Interior List</span> 
+                                    <span class="d-none d-sm-block">Interior</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#la_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Landscape List</span> 
+                                    <span class="d-none d-sm-block">Landscape</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#sa_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Sustainable List</span> 
+                                    <span class="d-none d-sm-block">Sustainable</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#ud_list" role="tab">
                                     <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Urban Design List</span> 
+                                    <span class="d-none d-sm-block">Urban Design</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -387,8 +390,8 @@
                                         </div>
                                         <div class="col-md-5 col-sm-12 col-lg-5 col-sm-12">
                                             <div class="form-floating mb-3">
-                                                <textarea class="form-control" id="project_address" required name="project_address" placeholder="Enter Address" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="100"></textarea>
-                                                <label for="project_address">Project Address<sup class="text-danger">*</sup></label>
+                                                <textarea class="form-control" id="project_address" name="project_address" placeholder="Enter Address" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="100"></textarea>
+                                                <label for="project_address">Project Address</label>
                                                 <span class="text-danger error" id="paerror"></span>
 
                                             </div>
@@ -396,37 +399,37 @@
                                        
                                         <div class="col-md-5 col-sm-12 col-lg-5 col-sm-12">
                                             <div class="form-floating mb-3">
-                                                <textarea class="form-control" id="client_document" required name="client_document" placeholder="Enter Address" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="100"></textarea>
-                                                <label for="address">Client Documents<sup class="text-danger">*</sup></label>
+                                                <textarea class="form-control" id="client_document" name="client_document" placeholder="Enter Address" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="100"></textarea>
+                                                <label for="address">Client Documents</label>
                                                 <span class="text-danger error" id="cderror"></span>
 
                                             </div>
                                         </div>
                                         <div class="col-md-2 col-sm-12 col-lg-2">
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="ar_plot" placeholder="Enter Area of Plot" name="ar_plot" required onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
-                                                <label for="ar_plot">Area of Plot<sup class="text-danger">*</sup></label>
+                                                <input type="text" class="form-control" id="ar_plot" placeholder="Enter Area of Plot" name="ar_plot" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
+                                                <label for="ar_plot">Area of Plot</label>
                                                 <span class="text-danger error" id="aperror"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-3 col-sm-12 col-lg-3">
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="constr_area" placeholder="Enter Costruction Area" name="constr_area" required onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
-                                                <label for="constr_area">Costruction Area<sup class="text-danger">*</sup></label>
+                                                <input type="text" class="form-control" id="constr_area" placeholder="Enter Costruction Area" name="constr_area" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
+                                                <label for="constr_area">Costruction Area</label>
                                                 <span class="text-danger error" id="caerror"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-3 col-sm-12 col-lg-3">
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="consultant" placeholder="Enter Consultants" name="consultant" required onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
-                                                <label for="consultant">Consultants<sup class="text-danger">*</sup></label>
+                                                <input type="text" class="form-control" id="consultant" placeholder="Enter Consultants" name="consultant" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
+                                                <label for="consultant">Consultants</label>
                                                 <span class="text-danger error" id="conerror"></span>
                                             </div>
                                         </div>
                                         <div class="col-md-3 col-sm-12 col-lg-3">
                                             <div class="form-floating mb-3">
-                                                <input type="text" class="form-control" id="contractor" placeholder="Enter Contractor" name="contractor" required onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
-                                                <label for="contractor">Contractor<sup class="text-danger">*</sup></label>
+                                                <input type="text" class="form-control" id="contractor" placeholder="Enter Contractor" name="contractor" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
+                                                <label for="contractor">Contractor</label>
                                                 <span class="text-danger error" id="cnterror"></span>
                                             </div>
                                         </div>
@@ -538,68 +541,7 @@
 
     var $body = $("body");
 
-    $('.nav-tabs a[href="#update_enquiry"]').click(function(){
-       
-        $('.enq_form')[0].reset();
-        $('#edit_id').val('');               
-        $('#pr_head_conceptual,#team_member_conceptual,#pr_head_working,#team_member_working,#supervisor').empty();
-        $("#enq_status").val("").trigger("change"); 
-        $("#project_type").val("").trigger("change"); 
-        $('.project_fields').hide();
-        getEnq();
-        
-
-    });
-
-    //For set/unset select field
-    $('.nav-tabs a[href="#ar_list"]').click(function()
-    {
-        $('#pr_head_conceptual,#team_member_conceptual,#pr_head_working,#team_member_working,#supervisor').empty();
-        $("#enq_status").val("").trigger("change"); 
-        $("#project_type").val("").trigger("change"); 
-        $('.project_fields').hide();
-        getEnq();
-    });
-
-    //For set/unset select field
-    $('.nav-tabs a[href="#in_list"]').click(function()
-    {
-        $('#pr_head_conceptual,#team_member_conceptual,#pr_head_working,#team_member_working,#supervisor').empty();
-        $("#enq_status").val("").trigger("change"); 
-        $("#project_type").val("").trigger("change"); 
-        $('.project_fields').hide();
-        getEnq();
-    });
-
-    //For set/unset select field
-    $('.nav-tabs a[href="#la_list"]').click(function()
-    {
-        $('#pr_head_conceptual,#team_member_conceptual,#pr_head_working,#team_member_working,#supervisor').empty();
-        $("#enq_status").val("").trigger("change"); 
-        $("#project_type").val("").trigger("change"); 
-        $('.project_fields').hide();
-        getEnq();
-    });
-
-    //For set/unset select field
-    $('.nav-tabs a[href="#sa_list"]').click(function()
-    {
-        $('#pr_head_conceptual,#team_member_conceptual,#pr_head_working,#team_member_working,#supervisor').empty();
-        $("#enq_status").val("").trigger("change"); 
-        $("#project_type").val("").trigger("change"); 
-        $('.project_fields').hide();
-        getEnq();
-    });
-
-    //For set/unset select field
-    $('.nav-tabs a[href="#ud_list"]').click(function()
-    {
-        $('#pr_head_conceptual,#team_member_conceptual,#pr_head_working,#team_member_working,#supervisor').empty();
-        $("#enq_status").val("").trigger("change"); 
-        $("#project_type").val("").trigger("change"); 
-        $('.project_fields').hide();
-        getEnq();
-    });
+  
 
     getEnq();
     function getEnq(){
@@ -1173,7 +1115,68 @@
         });
     }
 
-   
+    $('.nav-tabs a[href="#update_enquiry"]').click(function(){
+       
+       $('.enq_form')[0].reset();
+       $('#edit_id').val('');               
+       $('#pr_head_conceptual,#team_member_conceptual,#pr_head_working,#team_member_working,#supervisor').empty();
+       $("#enq_status").val("").trigger("change"); 
+       $("#project_type").val("").trigger("change"); 
+       $('.project_fields').hide();
+       getEnq();
+       
+
+   });
+
+    //For set/unset select field
+    $('.nav-tabs a[href="#ar_list"]').click(function()
+    {
+        $('#pr_head_conceptual,#team_member_conceptual,#pr_head_working,#team_member_working,#supervisor').empty();
+        $("#enq_status").val("").trigger("change"); 
+        $("#project_type").val("").trigger("change"); 
+        $('.project_fields').hide();
+        getEnq();
+    });
+
+    //For set/unset select field
+    $('.nav-tabs a[href="#in_list"]').click(function()
+    {
+        $('#pr_head_conceptual,#team_member_conceptual,#pr_head_working,#team_member_working,#supervisor').empty();
+        $("#enq_status").val("").trigger("change"); 
+        $("#project_type").val("").trigger("change"); 
+        $('.project_fields').hide();
+        getEnq();
+    });
+
+    //For set/unset select field
+    $('.nav-tabs a[href="#la_list"]').click(function()
+    {
+        $('#pr_head_conceptual,#team_member_conceptual,#pr_head_working,#team_member_working,#supervisor').empty();
+        $("#enq_status").val("").trigger("change"); 
+        $("#project_type").val("").trigger("change"); 
+        $('.project_fields').hide();
+        getEnq();
+    });
+
+    //For set/unset select field
+    $('.nav-tabs a[href="#sa_list"]').click(function()
+    {
+        $('#pr_head_conceptual,#team_member_conceptual,#pr_head_working,#team_member_working,#supervisor').empty();
+        $("#enq_status").val("").trigger("change"); 
+        $("#project_type").val("").trigger("change"); 
+        $('.project_fields').hide();
+        getEnq();
+    });
+
+    //For set/unset select field
+    $('.nav-tabs a[href="#ud_list"]').click(function()
+    {
+        $('#pr_head_conceptual,#team_member_conceptual,#pr_head_working,#team_member_working,#supervisor').empty();
+        $("#enq_status").val("").trigger("change"); 
+        $("#project_type").val("").trigger("change"); 
+        $('.project_fields').hide();
+        getEnq();
+    });
 
     // Enq Form Validation
     var n =0;
@@ -1253,23 +1256,23 @@
             ++n;
         }
 
-        if( $.trim(project_address).length == 0 )
-        {
-            $('#paerror').text('Please Enter Project Address .');
-            event.preventDefault();
-        }else{
-            $('#paerror').text('');
-            ++n;
-        }
+        // if( $.trim(project_address).length == 0 )
+        // {
+        //     $('#paerror').text('Please Enter Project Address .');
+        //     event.preventDefault();
+        // }else{
+        //     $('#paerror').text('');
+        //     ++n;
+        // }
 
-        if( $.trim(client_document).length == 0 )
-        {
-            $('#cderror').text('Please Enter Client Document.');
-            event.preventDefault();
-        }else{
-            $('#cderror').text('');
-            ++n;
-        }
+        // if( $.trim(client_document).length == 0 )
+        // {
+        //     $('#cderror').text('Please Enter Client Document.');
+        //     event.preventDefault();
+        // }else{
+        //     $('#cderror').text('');
+        //     ++n;
+        // }
 
         // if( $.trim(pr_head_conceptual).length == 0 )
         // {
@@ -1307,41 +1310,41 @@
             ++n;
         }
 
-        if( $.trim(ar_plot).length == 0 )
-        {
-            $('#aperror').text('Please Enter Area of Plot.');
-            event.preventDefault();
-        }else{
-            $('#aperror').text('');
-            ++n;
-        }
+        // if( $.trim(ar_plot).length == 0 )
+        // {
+        //     $('#aperror').text('Please Enter Area of Plot.');
+        //     event.preventDefault();
+        // }else{
+        //     $('#aperror').text('');
+        //     ++n;
+        // }
 
-        if( $.trim(constr_area).length == 0 )
-        {
-            $('#caerror').text('Please Enter Construction Area.');
-            event.preventDefault();
-        }else{
-            $('#caerror').text('');
-            ++n;
-        }
+        // if( $.trim(constr_area).length == 0 )
+        // {
+        //     $('#caerror').text('Please Enter Construction Area.');
+        //     event.preventDefault();
+        // }else{
+        //     $('#caerror').text('');
+        //     ++n;
+        // }
 
-        if( $.trim(consultant).length == 0 )
-        {
-            $('#conerror').text('Please Enter Consultant.');
-            event.preventDefault();
-        }else{
-            $('#conerror').text('');
-            ++n;
-        }
+        // if( $.trim(consultant).length == 0 )
+        // {
+        //     $('#conerror').text('Please Enter Consultant.');
+        //     event.preventDefault();
+        // }else{
+        //     $('#conerror').text('');
+        //     ++n;
+        // }
 
-        if( $.trim(contractor).length == 0 )
-        {
-            $('#cnterror').text('Please Enter Contractor.');
-            event.preventDefault();
-        }else{
-            $('#cnterror').text('');
-            ++n;
-        }
+        // if( $.trim(contractor).length == 0 )
+        // {
+        //     $('#cnterror').text('Please Enter Contractor.');
+        //     event.preventDefault();
+        // }else{
+        //     $('#cnterror').text('');
+        //     ++n;
+        // }
 
     });
 
@@ -1349,7 +1352,7 @@
     $(document).on("click",'#add_project',function()
     {        
         // alert(n)   ;
-        if(n==13)
+        if(n==7)
         {        
             var edit_id= $('#edit_id').val();
             var project_name= $('#project_name').val();

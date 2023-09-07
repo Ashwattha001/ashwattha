@@ -10,6 +10,8 @@
 @endpush
 @push('page_css')
 {!! Html::style('assets/libs/select2/css/select2.min.css') !!}
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <style>
     .form-floating>.form-control, .form-floating>.form-select {
         height: calc(2.8rem + 1px) !important;
@@ -30,6 +32,9 @@
     .textarea {
       min-height: inherit;
       height: auto;
+    }
+    .dtr-title{
+        font-weight: 600;
     }
     .form-check
     {
@@ -102,34 +107,34 @@
                        
                       
                         <ul class="nav nav-tabs nav-tabs-custom nav-justified" role="tablist">
-                            <li class="nav-item">
+                        <li class="nav-item">
                                 <a class="nav-link active" data-bs-toggle="tab" href="#ar_list" role="tab">
-                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Architecture List</span> 
+                                    <span class="d-block d-sm-none">AR [<strong id="ar_rec_count"> </strong>]</span>
+                                    <span class="d-none d-sm-block">Architecture [<strong id="ar_rec_count1"> </strong>] </span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#in_list" role="tab">
-                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Interior List</span> 
+                                    <span class="d-block d-sm-none">IN [<strong id="in_rec_count"> </strong>]</span>
+                                    <span class="d-none d-sm-block">Interior [<strong id="in_rec_count1"> </strong>]</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#la_list" role="tab">
-                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Landscape List</span> 
+                                    <span class="d-block d-sm-none">LA [<strong id="la_rec_count"> </strong>]</span>
+                                    <span class="d-none d-sm-block">Landscape [<strong id="la_rec_count1"> </strong>]</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#sa_list" role="tab">
-                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Sustainable List</span> 
+                                    <span class="d-block d-sm-none">SU [<strong id="su_rec_count"> </strong>]</span>
+                                    <span class="d-none d-sm-block">Sustainable [<strong id="su_rec_count1"> </strong>]</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-bs-toggle="tab" href="#ud_list" role="tab">
-                                    <span class="d-block d-sm-none"><i class="fas fa-home"></i></span>
-                                    <span class="d-none d-sm-block">Urban Design List</span> 
+                                    <span class="d-block d-sm-none">UD [<strong id="ud_rec_count"> </strong>]</span>
+                                    <span class="d-none d-sm-block">Urban Design [<strong id="ud_rec_count1"> </strong>]</span> 
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -147,13 +152,12 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col" style="width: 20px;">Sr.No</th>
-                                                <th scope="col" style="width: 100px">Enquiry No</th>
-                                                <th scope="col">Action</th>
+                                                <th scope="col" style="width: 100px">Project Name</th>
+                                                <th scope="col" style="width: 100px">Task Remark</th>
                                                 <th scope="col" style="width: 100px">Status</th>
-                                                <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Task Date</th>
                                                 <th scope="col" style="width: 100px">End Date</th>
-                                                <th scope="col" style="width: 100px">Task Remark</th>
+                                                <th scope="col">Action</th>
                                                 <th scope="col" style="width: 100px">Who Assigned</th>
                                                 <th scope="col" style="width: 100px">Team Member</th>
                                                 <th scope="col" style="width: 100px">Team Member Remark</th>
@@ -171,13 +175,12 @@
                                         <thead>
                                             <tr>
                                             <th scope="col" style="width: 20px;">Sr.No</th>
-                                                <th scope="col" style="width: 100px">Enquiry No</th>
-                                                <th scope="col">Action</th>
+                                                <th scope="col" style="width: 100px">Project Name</th>
+                                                <th scope="col" style="width: 100px">Task Remark</th>
                                                 <th scope="col" style="width: 100px">Status</th>
-                                                <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Task Date</th>
                                                 <th scope="col" style="width: 100px">End Date</th>
-                                                <th scope="col" style="width: 100px">Task Remark</th>
+                                                <th scope="col">Action</th>
                                                 <th scope="col" style="width: 100px">Who Assigned</th>
                                                 <th scope="col" style="width: 100px">Team Member</th>
                                                 <th scope="col" style="width: 100px">Team Member Remark</th>
@@ -195,13 +198,12 @@
                                         <thead>
                                             <tr>
                                             <th scope="col" style="width: 20px;">Sr.No</th>
-                                                <th scope="col" style="width: 100px">Enquiry No</th>
-                                                <th scope="col">Action</th>
+                                                <th scope="col" style="width: 100px">Project Name</th>
+                                                <th scope="col" style="width: 100px">Task Remark</th>
                                                 <th scope="col" style="width: 100px">Status</th>
-                                                <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Task Date</th>
                                                 <th scope="col" style="width: 100px">End Date</th>
-                                                <th scope="col" style="width: 100px">Task Remark</th>
+                                                <th scope="col">Action</th>
                                                 <th scope="col" style="width: 100px">Who Assigned</th>
                                                 <th scope="col" style="width: 100px">Team Member</th>
                                                 <th scope="col" style="width: 100px">Team Member Remark</th>
@@ -218,14 +220,13 @@
                                     <table class="table table-bordered dt-responsive nowrap w-100 table table-striped" id="sa_datatable"> 
                                         <thead>
                                             <tr>
-                                                <th scope="col" style="width: 20px;">Sr.No</th>
-                                                <th scope="col" style="width: 100px">Enquiry No</th>
-                                                <th scope="col">Action</th>
+                                            <th scope="col" style="width: 20px;">Sr.No</th>
+                                                <th scope="col" style="width: 100px">Project Name</th>
+                                                <th scope="col" style="width: 100px">Task Remark</th>
                                                 <th scope="col" style="width: 100px">Status</th>
-                                                <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Task Date</th>
                                                 <th scope="col" style="width: 100px">End Date</th>
-                                                <th scope="col" style="width: 100px">Task Remark</th>
+                                                <th scope="col">Action</th>
                                                 <th scope="col" style="width: 100px">Who Assigned</th>
                                                 <th scope="col" style="width: 100px">Team Member</th>
                                                 <th scope="col" style="width: 100px">Team Member Remark</th>
@@ -242,14 +243,13 @@
                                     <table class="table table-bordered dt-responsive nowrap w-100 table table-striped" id="ud_datatable"> 
                                         <thead>
                                             <tr>
-                                                <th scope="col" style="width: 20px;">Sr.No</th>
-                                                <th scope="col" style="width: 100px">Enquiry No</th>
-                                                <th scope="col">Action</th>
+                                            <th scope="col" style="width: 20px;">Sr.No</th>
+                                                <th scope="col" style="width: 100px">Project Name</th>
+                                                <th scope="col" style="width: 100px">Task Remark</th>
                                                 <th scope="col" style="width: 100px">Status</th>
-                                                <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Task Date</th>
                                                 <th scope="col" style="width: 100px">End Date</th>
-                                                <th scope="col" style="width: 100px">Task Remark</th>
+                                                <th scope="col">Action</th>
                                                 <th scope="col" style="width: 100px">Who Assigned</th>
                                                 <th scope="col" style="width: 100px">Team Member</th>
                                                 <th scope="col" style="width: 100px">Team Member Remark</th>
@@ -277,6 +277,7 @@
                                                         <option value="Interior">Interior</option>
                                                         <option value="Landscape">Landscape</option>
                                                         <option value="Sustainable">Sustainable</option>
+                                                        <option value="Urban Design">Urban Design</option>
                                                 </select>
                                                 <span class="text-danger error" id="pterror"></span>
                                             </div>
@@ -326,14 +327,17 @@
                                             </div>
                                         </div>
                                        
-                                        <div class="col-md-5 col-sm-12 col-lg-5">
+                                        <!-- <div class="col-md-5 col-sm-12 col-lg-5">
                                             <div class="form-group mb-3">
                                                 <label for="task_remark">Task Remark</label>
                                                 <textarea class="form-control " id="task_remark" name="task_remark" rows="2" placeholder="Enter Task Remark" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);"></textarea>
                                                 <span class="text-danger error" id="trerror"></span>
                                             </div>  
+                                        </div> -->
+                                        <div class="col-md-5 col-sm-12 col-lg-5">   
+                                            <textarea  id="summernote" name="task_remark"></textarea>
+                                            <span class="text-danger error" id="trerror"></span>
                                         </div>
-
                                         <div class="col-md-5 col-sm-12 col-lg-5 emp_remark">
                                             <div class="form-group mb-3">
                                                 <label for="emp_remark">Team Member Remark</label>
@@ -344,7 +348,7 @@
 
                                         <div class="col-md-2 col-sm-12 col-lg-2" style="margin-top: -5px">
                                             <div class="form-group mb-3">
-                                                <label for="task_status" class="form-label" style="font-size: 11px;margin-bottom: 2px;">Project Status<sup class="text-danger">*</sup></label>
+                                                <label for="task_status" class="form-label" style="font-size: 11px;margin-bottom: 2px;">Task Status<sup class="text-danger">*</sup></label>
                                                 <select class="form-control select2" id="task_status" required name="task_status">
                                                     <option value="" disabled selected>Select</option>
                                                  
@@ -396,6 +400,7 @@
 
 @push('page_js')
 {!! Html::script('assets/libs/select2/js/select2.min.js') !!}
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 
 <script>
     $(document).ready(function(){
@@ -405,8 +410,346 @@
 
     var $body = $("body");
 
+    $('#summernote').summernote({
+      placeholder: '',
+      tabsize: 2,
+      height: 100,
+      toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+      ]
+    });
+
+    getTask();
+    function getTask(){
+
+        $.ajax({
+            headers:{
+                'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
+            },
+            url:"{{url('get-conv-tasks')}}",
+            type :'get',
+            data : {},
+            cache: false,
+            dataType: 'json',                 
+            success:function(data){
+                console.log(data);
+                $("#ar_datatable").DataTable().destroy();
+                $("#in_datatable").DataTable().destroy();
+                $("#la_datatable").DataTable().destroy();
+                $("#sa_datatable").DataTable().destroy();
+                $("#ud_datatable").DataTable().destroy();
+
+                content ="";
+                content1 ="";
+                content2 ="";
+                content3="";
+                content4="";
+
+                var i=j=k=l=m=0;        
+                     
+                $.each(data.data,function(index,row){
+                    //date convert into dd/mm/yyyy
+                    function formatDate (input) {
+                        var datePart = input.match(/\d+/g),
+                        year = datePart[0].substring(0), // get only two digits
+                        month = datePart[1], day = datePart[2];
+                        return day+'-'+month+'-'+year;
+                    }
+                    
+                    if(row.task_date != null){
+                        var task_date = formatDate (row.task_date); // "18/01/10"
+                    }else{
+                        var task_date = " - "
+                    }
+
+                    if(row.end_date != null){
+                        var end_date = formatDate (row.end_date); // "18/01/10"
+                    }else{
+                        var end_date = " - "
+                    }
+
+                    if(row.project_type == "Architecture")
+                    {
+                        content +="<tr>";
+                        content +="<td>"+ ++i  +"</td>";
+                        content +="<td>"+row.project_name+"</td>";
+                        content +="<td>"+row.task_remark+"</td>";
+                        if(row.task_status == "Alloted"){
+                            content +="<td><span class='badge badge-soft-primary'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "In Process"){
+                            content +="<td><span class='badge badge-soft-warning'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "Pending"){
+                            content +="<td><span class='badge badge-soft-danger'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "Completed"){
+                            content +="<td><span class='badge badge-soft-success'>"+row.task_status+"</span></td>";
+                        }
+                       
+                        content +="<td>"+task_date+"</td>";
+                        content +="<td>"+end_date+"</td>";
+                        content +="<td>";
+                            if(row.task_status != "Completed"){
+                                content +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-project_type='"+row.project_type+"' data-enq_pr_id='"+row.enq_pr_id+"' data-team_member='"+row.team_member+"' data-task_date='"+row.task_date+"' data-end_date='"+row.end_date+"' data-task_remark='"+row.task_remark+"' data-employee_remark='"+row.employee_remark+"' data-task_status='"+row.task_status+"' data-enquiry_no='"+row.enquiry_no+"' data-project_name='"+row.project_name+"' data-et_aid='"+row.et_aid+"'  data-uid='"+row.uid+"' data-au_id='"+data.au_id+"' data-assign_id='"+row.assign_id+"'><i class='far fa-edit'></i></a> ";
+                            }
+                            
+
+                            if(data.roles == 0)
+                            {
+                                content +="<button class='btn btn-outline-secondary btn-sm delI' rel='tooltip' data-bs-placement='top' title='Delete Task' data-id='"+row.id+"'><i class='fas fa-trash-alt'></i></button>";
+                            }
+                           
+                            
+                        content += "</td>";
+                        content +="<td>"+row.assign_name+"</td>";
+                        content +="<td>"+row.name+"</td>";
+                        if(row.employee_remark != null){
+                            content +="<td>"+row.employee_remark+"</td>";
+                        }else{
+                            content +="<td> - </td>";
+                        }
+                        content += "</tr>";
+
+                    }
+
+                    if(row.project_type == "Interior")
+                    {
+                        content1 +="<tr>";
+                        content1 +="<td>"+ ++j +"</td>";
+                        content1 +="<td>"+row.project_name+"</td>";
+                        content1 +="<td>"+row.task_remark+"</td>";
+                        if(row.task_status == "Alloted"){
+                            content1 +="<td><span class='badge badge-soft-primary'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "In Process"){
+                            content1 +="<td><span class='badge badge-soft-warning'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "Pending"){
+                            content1 +="<td><span class='badge badge-soft-danger'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "Completed"){
+                            content1 +="<td><span class='badge badge-soft-success'>"+row.task_status+"</span></td>";
+                        }
+                       
+                        content1 +="<td>"+task_date+"</td>";
+                        content1 +="<td>"+end_date+"</td>";
+                        content1 +="<td>";
+                            if(row.task_status != "Completed"){
+                                content1 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-project_type='"+row.project_type+"' data-enq_pr_id='"+row.enq_pr_id+"' data-team_member='"+row.team_member+"' data-task_date='"+row.task_date+"' data-end_date='"+row.end_date+"' data-task_remark='"+row.task_remark+"' data-employee_remark='"+row.employee_remark+"' data-task_status='"+row.task_status+"' data-enquiry_no='"+row.enquiry_no+"' data-project_name='"+row.project_name+"' data-et_aid='"+row.et_aid+"'  data-uid='"+row.uid+"' data-au_id='"+data.au_id+"' data-assign_id='"+row.assign_id+"'><i class='far fa-edit'></i></a> ";
+                            }
+
+                            if(data.roles == 0)
+                            {
+                                content1 +="<button class='btn btn-outline-secondary btn-sm delI' rel='tooltip' data-bs-placement='top' title='Delete Task' data-id='"+row.id+"'><i class='fas fa-trash-alt'></i></button>";
+                            }
+                           
+                            
+                        content1 += "</td>";
+                        content1 +="<td>"+row.assign_name+"</td>";
+                        content1 +="<td>"+row.name+"</td>";
+                        if(row.employee_remark != null){
+                            content1 +="<td>"+row.employee_remark+"</td>";
+                        }else{
+                            content1 +="<td> - </td>";
+                        }
+                        content1 += "</tr>";
+                        
+                    }
+
+                    if(row.project_type == "Landscape")
+                    {
+                        content2 +="<tr>";
+                        content2 +="<td>"+ ++k +"</td>";
+                        content2 +="<td>"+row.project_name+"</td>";
+                        content2 +="<td>"+row.task_remark+"</td>";
+                        if(row.task_status == "Alloted"){
+                            content2 +="<td><span class='badge badge-soft-primary'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "In Process"){
+                            content2 +="<td><span class='badge badge-soft-warning'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "Pending"){
+                            content2 +="<td><span class='badge badge-soft-danger'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "Completed"){
+                            content2 +="<td><span class='badge badge-soft-success'>"+row.task_status+"</span></td>";
+                        }
+                       
+                        content2 +="<td>"+task_date+"</td>";
+                        content2 +="<td>"+end_date+"</td>";
+                        content2 +="<td>";
+                            if(row.task_status != "Completed"){
+                                content2 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-project_type='"+row.project_type+"' data-enq_pr_id='"+row.enq_pr_id+"' data-team_member='"+row.team_member+"' data-task_date='"+row.task_date+"' data-end_date='"+row.end_date+"' data-task_remark='"+row.task_remark+"' data-employee_remark='"+row.employee_remark+"' data-task_status='"+row.task_status+"' data-enquiry_no='"+row.enquiry_no+"' data-project_name='"+row.project_name+"' data-et_aid='"+row.et_aid+"'  data-uid='"+row.uid+"' data-au_id='"+data.au_id+"' data-assign_id='"+row.assign_id+"'><i class='far fa-edit'></i></a> ";
+                            }
+
+                            if(data.roles == 0)
+                            {
+                                content2 +="<button class='btn btn-outline-secondary btn-sm delI' rel='tooltip' data-bs-placement='top' title='Delete Task' data-id='"+row.id+"'><i class='fas fa-trash-alt'></i></button>";
+                            }
+                           
+                            
+                        content2 += "</td>";
+                        content2 +="<td>"+row.assign_name+"</td>";
+                        content2 +="<td>"+row.name+"</td>";
+                        if(row.employee_remark != null){
+                            content2 +="<td>"+row.employee_remark+"</td>";
+                        }else{
+                            content2 +="<td> - </td>";
+                        }
+                        content2 += "</tr>";
+                        
+                    }
+                    
+                    if(row.project_type == "Sustainable")
+                    {
+                        content3 +="<tr>";
+                        content3 +="<td>"+ ++l +"</td>";
+                        content3 +="<td>"+row.project_name+"</td>";
+                        content3 +="<td>"+row.task_remark+"</td>";
+                        if(row.task_status == "Alloted"){
+                            content3 +="<td><span class='badge badge-soft-primary'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "In Process"){
+                            content3 +="<td><span class='badge badge-soft-warning'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "Pending"){
+                            content3 +="<td><span class='badge badge-soft-danger'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "Completed"){
+                            content3 +="<td><span class='badge badge-soft-success'>"+row.task_status+"</span></td>";
+                        }
+                       
+                        content3 +="<td>"+task_date+"</td>";
+                        content3 +="<td>"+end_date+"</td>";
+                        content3 +="<td>";
+                            if(row.task_status != "Completed"){
+                                content3 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-project_type='"+row.project_type+"' data-enq_pr_id='"+row.enq_pr_id+"' data-team_member='"+row.team_member+"' data-task_date='"+row.task_date+"' data-end_date='"+row.end_date+"' data-task_remark='"+row.task_remark+"' data-employee_remark='"+row.employee_remark+"' data-task_status='"+row.task_status+"' data-enquiry_no='"+row.enquiry_no+"' data-project_name='"+row.project_name+"' data-et_aid='"+row.et_aid+"'  data-uid='"+row.uid+"' data-au_id='"+data.au_id+"' data-assign_id='"+row.assign_id+"'><i class='far fa-edit'></i></a> ";
+                            }
+
+                            if(data.roles == 0)
+                            {
+                                content3 +="<button class='btn btn-outline-secondary btn-sm delI' rel='tooltip' data-bs-placement='top' title='Delete Task' data-id='"+row.id+"'><i class='fas fa-trash-alt'></i></button>";
+                            }
+                           
+                            
+                        content3 += "</td>";
+                        content3 +="<td>"+row.assign_name+"</td>";
+                        content3 +="<td>"+row.name+"</td>";
+                        if(row.employee_remark != null){
+                            content3 +="<td>"+row.employee_remark+"</td>";
+                        }else{
+                            content3 +="<td> - </td>";
+                        }
+                        content3 += "</tr>";
+                        
+                    }
+
+                    if(row.project_type == "Urban Design")
+                    {
+                        content4 +="<tr>";
+                        content4 +="<td>"+ ++m +"</td>";
+                        content4 +="<td>"+row.project_name+"</td>";
+                        content4 +="<td>"+row.task_remark+"</td>";
+                        if(row.task_status == "Alloted"){
+                            content4 +="<td><span class='badge badge-soft-primary'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "In Process"){
+                            content4 +="<td><span class='badge badge-soft-warning'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "Pending"){
+                            content4 +="<td><span class='badge badge-soft-danger'>"+row.task_status+"</span></td>";
+                        }
+                        else if(row.task_status == "Completed"){
+                            content4 +="<td><span class='badge badge-soft-success'>"+row.task_status+"</span></td>";
+                        }
+                       
+                        content4 +="<td>"+task_date+"</td>";
+                        content4 +="<td>"+end_date+"</td>";
+                        content4 +="<td>";
+                            if(row.task_status != "Completed"){
+                                content4 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-project_type='"+row.project_type+"' data-enq_pr_id='"+row.enq_pr_id+"' data-team_member='"+row.team_member+"' data-task_date='"+row.task_date+"' data-end_date='"+row.end_date+"' data-task_remark='"+row.task_remark+"' data-employee_remark='"+row.employee_remark+"' data-task_status='"+row.task_status+"' data-enquiry_no='"+row.enquiry_no+"' data-project_name='"+row.project_name+"' data-et_aid='"+row.et_aid+"'  data-uid='"+row.uid+"' data-au_id='"+data.au_id+"' data-assign_id='"+row.assign_id+"'><i class='far fa-edit'></i></a> ";
+                            }
+
+                            if(data.roles == 0)
+                            {
+                                content4 +="<button class='btn btn-outline-secondary btn-sm delI' rel='tooltip' data-bs-placement='top' title='Delete Task' data-id='"+row.id+"'><i class='fas fa-trash-alt'></i></button>";
+                            }
+                           
+                            
+                        content4 += "</td>";
+                        content4 +="<td>"+row.assign_name+"</td>";
+                        content4 +="<td>"+row.name+"</td>";
+                        if(row.employee_remark != null){
+                            content4 +="<td>"+row.employee_remark+"</td>";
+                        }else{
+                            content4 +="<td> - </td>";
+                        }
+                        content4 += "</tr>";
+                        
+                    }
+                 
+                });
+                
+                $("#ar_records").html(content); //For append html data
+                $('#ar_datatable').dataTable();
+
+                $("#in_records").html(content1); //For append html data
+                $('#in_datatable').dataTable();
+
+                $("#la_records").html(content2); //For append html data
+                $('#la_datatable').dataTable();
+
+                $("#sa_records").html(content3); //For append html data
+                $('#sa_datatable').dataTable();
+
+                $("#ud_records").html(content4); //For append html data
+                $('#ud_datatable').dataTable();
+
+                $("#ar_rec_count").html(i); //For append html data
+                $("#ar_rec_count1").html(i); //For append html data
+
+                $("#in_rec_count").html(j); //For append html data
+                $("#in_rec_count1").html(j); //For append html data
+
+                $("#la_rec_count").html(k); //For append html data
+                $("#la_rec_count1").html(k); //For append html data
+
+                $("#su_rec_count").html(l); //For append html data
+                $("#su_rec_count1").html(l); //For append html data
+
+                $("#ud_rec_count").html(m); //For append html data
+                $("#ud_rec_count1").html(m); //For append html data
+                
+                //For Add enquiry
+                $('#team_member').append("<option value='' class='text-muted' selected disabled>"+'Select'+"</option>");
+                // $('#labour').append("<option value='' class='text-muted' >"+'All'+"</option>");
+
+                $.each(data.u_obj,function(index,row){
+                    //For Add enquiry
+                    $('#team_member').append("<option value='"+row.id+"'>"+row.name+"</option>");
+                   
+                });
+
+                $('#summernote,#task_date,#end_date').prop('readonly', false);
+                if(data.roles == 2 || data.roles == 3)
+                {
+                    $('.role_wise').hide();
+                    $('.emp_remark').show();
+                    $('#project_type,#team_member,#task_date,#end_date,#summernote').prop('disabled', true);
+                }
+            }
+        });
+    }
+
     $('.nav-tabs a[href="#update_task"]').click(function(){
-       
+        
         $('.enq_form')[0].reset();
         $('#edit_id').val('');               
         $('#task_project,#team_member').empty();
@@ -416,11 +759,10 @@
         $('.project_name').hide();
         $('.emp_remark').hide();
         // $('.role_wise').hide();
+        $("#summernote").summernote("code", "");
 
         $('#project_type,#team_member').prop('disabled', false);
         getTask();
-        
-
     });
 
     //For set/unset select field
@@ -489,286 +831,6 @@
         getTask();
     });
 
-    getTask();
-    function getTask(){
-
-        $.ajax({
-            headers:{
-                'X-CSRF-TOKEN' : $('meta[name="csrf-token"]').attr('content')
-            },
-            url:"{{url('get-conv-tasks')}}",
-            type :'get',
-            data : {},
-            cache: false,
-            dataType: 'json',                 
-            success:function(data){
-                console.log(data);
-                $("#ar_datatable").DataTable().destroy();
-                $("#in_datatable").DataTable().destroy();
-                $("#la_datatable").DataTable().destroy();
-                $("#sa_datatable").DataTable().destroy();
-                $("#ud_datatable").DataTable().destroy();
-
-                content ="";
-                content1 ="";
-                content2 ="";
-                content3="";
-                content4="";
-
-                var i=j=k=l=m=0;        
-                     
-                $.each(data.data,function(index,row){
-             
-                    if(row.project_type == "Architecture")
-                    {
-                        content +="<tr>";
-                        content +="<td>"+ ++i  +"</td>";
-                        content +="<td>"+row.enquiry_no+"</td>";
-                        
-                        content +="<td>";
-                            content +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-project_type='"+row.project_type+"' data-enq_pr_id='"+row.enq_pr_id+"' data-team_member='"+row.team_member+"' data-task_date='"+row.task_date+"' data-end_date='"+row.end_date+"' data-task_remark='"+row.task_remark+"' data-employee_remark='"+row.employee_remark+"' data-task_status='"+row.task_status+"' data-enquiry_no='"+row.enquiry_no+"' data-project_name='"+row.project_name+"' data-et_aid='"+row.et_aid+"'  data-uid='"+row.uid+"' data-au_id='"+data.au_id+"' data-assign_id='"+row.assign_id+"'><i class='far fa-edit'></i></a> ";
-
-                            if(data.roles == 0)
-                            {
-                                content +="<button class='btn btn-outline-secondary btn-sm delI' rel='tooltip' data-bs-placement='top' title='Delete Task' data-id='"+row.id+"'><i class='fas fa-trash-alt'></i></button>";
-                            }
-                           
-                            
-                        content += "</td>";
-                    
-                        if(row.task_status == "Alloted"){
-                            content +="<td><span class='badge badge-soft-primary'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "In Process"){
-                            content +="<td><span class='badge badge-soft-warning'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "Pending"){
-                            content +="<td><span class='badge badge-soft-danger'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "Completed"){
-                            content +="<td><span class='badge badge-soft-success'>"+row.task_status+"</span></td>";
-                        }
-                        content +="<td>"+row.project_name+"</td>";
-                        content +="<td>"+row.task_date+"</td>";
-                        content +="<td>"+row.end_date+"</td>";
-                        content +="<td>"+row.task_remark+"</td>";
-                        content +="<td>"+row.assign_name+"</td>";
-                        content +="<td>"+row.name+"</td>";
-                        if(row.employee_remark != null){
-                            content +="<td>"+row.employee_remark+"</td>";
-                        }else{
-                            content +="<td> - </td>";
-                        }
-                        content += "</tr>";
-
-                    }
-
-                    if(row.project_type == "Interior")
-                    {
-                        content1 +="<tr>";
-                        content1 +="<td>"+ ++j  +"</td>";
-                        content1 +="<td>"+row.enquiry_no+"</td>";
-                        
-                        content1 +="<td>";
-                            content1 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-project_type='"+row.project_type+"' data-enq_pr_id='"+row.enq_pr_id+"' data-team_member='"+row.team_member+"' data-task_date='"+row.task_date+"' data-end_date='"+row.end_date+"' data-task_remark='"+row.task_remark+"' data-task_status='"+row.task_status+"' data-enquiry_no='"+row.enquiry_no+"' data-project_name='"+row.project_name+"' data-et_aid='"+row.et_aid+"' data-uid='"+row.uid+"' data-assign_id='"+row.assign_id+"'><i class='far fa-edit'></i></a> ";
-                            if(data.roles == 0){
-                                content1 +="<button class='btn btn-outline-secondary btn-sm delI' rel='tooltip' data-bs-placement='top' title='Delete Task' data-id='"+row.id+"'><i class='fas fa-trash-alt'></i></button>";
-                            }
-                           
-                            
-                        conten1 += "</td>";
-                    
-                        if(row.task_status == "Alloted"){
-                            content1 +="<td><span class='badge badge-soft-primary'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "In Process"){
-                            content1 +="<td><span class='badge badge-soft-warning'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "Pending"){
-                            content1 +="<td><span class='badge badge-soft-danger'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "Completed"){
-                            content1 +="<td><span class='badge badge-soft-success'>"+row.task_status+"</span></td>";
-                        }
-                        content1 +="<td>"+row.project_name+"</td>";
-                        content1 +="<td>"+row.task_date+"</td>";
-                        content1 +="<td>"+row.end_date+"</td>";
-                        content1 +="<td>"+row.task_remark+"</td>";
-                        content1 +="<td>"+row.assign_name+"</td>";
-                        content1 +="<td>"+row.name+"</td>";
-                        if(row.employee_remark != null){
-                            content1 +="<td>"+row.employee_remark+"</td>";
-                        }else{
-                            content1 +="<td> - </td>";
-                        }
-                        content1 += "</tr>";
-                        
-                    }
-
-                    if(row.project_type == "Landscape")
-                    {
-                        content2 +="<tr>";
-                        content2 +="<td>"+ ++k  +"</td>";
-                        content2 +="<td>"+row.enquiry_no+"</td>";
-                        
-                        content2 +="<td>";
-                            content2 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-project_type='"+row.project_type+"' data-enq_pr_id='"+row.enq_pr_id+"' data-team_member='"+row.team_member+"' data-task_date='"+row.task_date+"' data-end_date='"+row.end_date+"' data-task_remark='"+row.task_remark+"' data-task_status='"+row.task_status+"' data-enquiry_no='"+row.enquiry_no+"' data-project_name='"+row.project_name+"' data-et_aid='"+row.et_aid+"' data-uid='"+row.uid+"' data-assign_id='"+row.assign_id+"'><i class='far fa-edit'></i></a> ";
-                            if(data.roles == 0){
-                                content2 +="<button class='btn btn-outline-secondary btn-sm delI' rel='tooltip' data-bs-placement='top' title='Delete Task' data-id='"+row.id+"'><i class='fas fa-trash-alt'></i></button>";
-                            }
-                           
-                            
-                        content2 += "</td>";
-                    
-                        if(row.task_status == "Alloted"){
-                            content2 +="<td><span class='badge badge-soft-primary'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "In Process"){
-                            content2 +="<td><span class='badge badge-soft-warning'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "Pending"){
-                            content2 +="<td><span class='badge badge-soft-danger'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "Completed"){
-                            content2 +="<td><span class='badge badge-soft-success'>"+row.task_status+"</span></td>";
-                        }
-                        content2 +="<td>"+row.project_name+"</td>";
-                        content2 +="<td>"+row.task_date+"</td>";
-                        content2 +="<td>"+row.end_date+"</td>";
-                        content2 +="<td>"+row.task_remark+"</td>";
-                        content2 +="<td>"+row.assign_name+"</td>";
-                        content2 +="<td>"+row.name+"</td>";
-                        if(row.employee_remark != null){
-                            content2 +="<td>"+row.employee_remark+"</td>";
-                        }else{
-                            content2 +="<td> - </td>";
-                        }
-                        content2 += "</tr>";
-                        
-                    }
-                    
-                    if(row.project_type == "Sustainable")
-                    {
-                        content3 +="<tr>";
-                        content3 +="<td>"+ ++l  +"</td>";
-                        content3 +="<td>"+row.enquiry_no+"</td>";
-                        
-                        content3 +="<td>";
-                            content3 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-project_type='"+row.project_type+"' data-enq_pr_id='"+row.enq_pr_id+"' data-team_member='"+row.team_member+"' data-task_date='"+row.task_date+"' data-end_date='"+row.end_date+"' data-task_remark='"+row.task_remark+"' data-task_status='"+row.task_status+"' data-enquiry_no='"+row.enquiry_no+"' data-project_name='"+row.project_name+"' data-et_aid='"+row.et_aid+"' data-uid='"+row.uid+"' data-assign_id='"+row.assign_id+"'><i class='far fa-edit'></i></a> ";
-                            if(data.roles == 0){
-                                content3 +="<button class='btn btn-outline-secondary btn-sm delI' rel='tooltip' data-bs-placement='top' title='Delete Task' data-id='"+row.id+"'><i class='fas fa-trash-alt'></i></button>";
-                            }
-                           
-                            
-                        content3 += "</td>";
-                    
-                        if(row.task_status == "Alloted"){
-                            content3 +="<td><span class='badge badge-soft-primary'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "In Process"){
-                            content3 +="<td><span class='badge badge-soft-warning'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "Pending"){
-                            content3 +="<td><span class='badge badge-soft-danger'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "Completed"){
-                            content3 +="<td><span class='badge badge-soft-success'>"+row.task_status+"</span></td>";
-                        }
-                        content3 +="<td>"+row.project_name+"</td>";
-                        content3 +="<td>"+row.task_date+"</td>";
-                        content3 +="<td>"+row.end_date+"</td>";
-                        content3 +="<td>"+row.task_remark+"</td>";
-                        content3 +="<td>"+row.assign_name+"</td>";
-                        content3 +="<td>"+row.name+"</td>";
-                        if(row.employee_remark != null){
-                            content3 +="<td>"+row.employee_remark+"</td>";
-                        }else{
-                            content3 +="<td> - </td>";
-                        }
-                        content3 += "</tr>";
-                        
-                    }
-
-                    if(row.project_type == "Urban Design")
-                    {
-                        content4 +="<tr>";
-                        content4 +="<td>"+ ++m  +"</td>";
-                        content4 +="<td>"+row.enquiry_no+"</td>";
-                        
-                        content4 +="<td>";
-                            content4 +="<a class='btn btn-outline-secondary btn-sm editU' rel='tooltip' data-bs-placement='top' title='Edit Task' data-id='"+row.id+"' data-project_type='"+row.project_type+"' data-enq_pr_id='"+row.enq_pr_id+"' data-team_member='"+row.team_member+"' data-task_date='"+row.task_date+"' data-end_date='"+row.end_date+"' data-task_remark='"+row.task_remark+"' data-task_status='"+row.task_status+"' data-enquiry_no='"+row.enquiry_no+"' data-project_name='"+row.project_name+"' data-et_aid='"+row.et_aid+"' data-uid='"+row.uid+"' data-assign_id='"+row.assign_id+"'><i class='far fa-edit'></i></a> ";
-                            if(data.roles == 0){
-                                content4 +="<button class='btn btn-outline-secondary btn-sm delI' rel='tooltip' data-bs-placement='top' title='Delete Task' data-id='"+row.id+"'><i class='fas fa-trash-alt'></i></button>";
-                            }
-                           
-                            
-                        content4 += "</td>";
-                    
-                        if(row.task_status == "Alloted"){
-                            content4 +="<td><span class='badge badge-soft-primary'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "In Process"){
-                            content4 +="<td><span class='badge badge-soft-warning'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "Pending"){
-                            content4 +="<td><span class='badge badge-soft-danger'>"+row.task_status+"</span></td>";
-                        }
-                        else if(row.task_status == "Completed"){
-                            content4 +="<td><span class='badge badge-soft-success'>"+row.task_status+"</span></td>";
-                        }
-                        content4 +="<td>"+row.project_name+"</td>";
-                        content4 +="<td>"+row.task_date+"</td>";
-                        content4 +="<td>"+row.end_date+"</td>";
-                        content4 +="<td>"+row.task_remark+"</td>";
-                        content4 +="<td>"+row.assign_name+"</td>";
-                        content4 +="<td>"+row.name+"</td>";
-                        if(row.employee_remark != null){
-                            content4 +="<td>"+row.employee_remark+"</td>";
-                        }else{
-                            content4 +="<td> - </td>";
-                        }
-                        content4 += "</tr>";
-                        
-                    }
-                 
-                });
-                
-                $("#ar_records").html(content); //For append html data
-                $('#ar_datatable').dataTable();
-
-                $("#in_records").html(content1); //For append html data
-                $('#in_datatable').dataTable();
-
-                $("#la_records").html(content2); //For append html data
-                $('#la_datatable').dataTable();
-
-                $("#sa_records").html(content3); //For append html data
-                $('#sa_datatable').dataTable();
-
-                $("#ud_records").html(content4); //For append html data
-                $('#ud_datatable').dataTable();
-                
-                //For Add enquiry
-                $('#team_member').append("<option value='' class='text-muted' selected disabled>"+'Select'+"</option>");
-                // $('#labour').append("<option value='' class='text-muted' >"+'All'+"</option>");
-
-                $.each(data.u_obj,function(index,row){
-                    //For Add enquiry
-                    $('#team_member').append("<option value='"+row.id+"'>"+row.name+"</option>");
-                   
-                });
-
-                $('#task_remark,#task_date,#end_date').prop('readonly', false);
-                if(data.roles == 2 || data.roles == 3)
-                {
-                    $('.role_wise').hide();
-                    $('.emp_remark').show();
-                    $('#project_type,#team_member,#task_date,#end_date,#task_remark').prop('disabled', true);
-                }
-            }
-        });
-    }
-
     // Task Form Validation
     var n =0;
     $("#add_task").click(function(event) 
@@ -781,7 +843,7 @@
         var task_date= $('#task_date').val();
         var end_date= $('#end_date').val();
         
-        var task_remark = $('#task_remark').val();
+        var task_remark = $('#summernote').val();
         var emp_remark = $('#emp_remark').val();
         var task_status = $('#task_status').val();
        
@@ -883,9 +945,9 @@
         else{
             m = 7;
         }
-        // alert(n);
+        // alert(m);  
         if(n == m)
-        {                   
+        {              
             var project_type = $('#project_type').val();
             var task_project= $('#task_project').val();
             var team_member = $('#team_member').val();
@@ -893,7 +955,7 @@
             var task_date= $('#task_date').val();
             var end_date= $('#end_date').val();
             
-            var task_remark = $('#task_remark').val();
+            var task_remark = $('#summernote').val();
             var emp_remark = $('#emp_remark').val();
             var task_status = $('#task_status').val();
 
@@ -1055,16 +1117,16 @@
 
         if(au_id == assign_id){
             $('.emp_remark').hide();
-            $('#task_remark,#task_date,#end_date').prop('readonly', false);
+            $('#summernote,#task_date,#end_date').prop('readonly', false);
         }else{
         
             $('.emp_remark').show();
 
             if(role == 0){
-                $('#task_remark,#task_date,#end_date,#emp_remark').prop('readonly', true);
+                $('#summernote,#task_date,#end_date,#emp_remark').prop('readonly', true);
                 $('#add_task').hide();
             }else{
-                $('#task_remark,#task_date,#end_date').prop('readonly', true);
+                $('#summernote,#task_date,#end_date').prop('readonly', true);
 
             }
            
@@ -1102,7 +1164,8 @@
             $('#edit_id').val(id);   
             $('#task_date').val(task_date); 
             $('#end_date').val(end_date); 
-            $('#task_remark').val(task_remark);
+            // $('#summernote').val(task_remark);
+            $("#summernote").summernote("code", task_remark);
             $('#emp_remark').val(employee_remark); 
             $('#project_name').val(enqNo_name); 
             $("#project_type").val(project_type).trigger("change");             
