@@ -335,26 +335,27 @@
                                         </div>
                                         
                                         <div class="col-md-12 col-sm-12 col-lg-12 col-sm-12">
-                                            <div class="form-floating mb-3">
-                                                <textarea class="form-control" id="client_req" required name="client_req" placeholder="Client Requirement" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="100"></textarea>
+                                            <div class="form-group mb-3">
                                                 <label for="client_req">Client Requirement<sup class="text-danger">*</sup></label>
+                                                <textarea class="form-control" id="client_req" required name="client_req" placeholder="Client Requirement" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" ></textarea>
                                                 <span class="text-danger error" id="crerror"></span>
 
                                             </div>
                                         </div>
                                         <div class="col-md-5 col-sm-12 col-lg-5 col-sm-12">
-                                            <div class="form-floating mb-3">
-                                                <textarea class="form-control" id="project_address" name="project_address" placeholder="Enter Address" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="100"></textarea>
+                                           <div class="form-group mb-3">
                                                 <label for="project_address">Project Address</label>
+                                                <textarea class="form-control" id="project_address" name="project_address" placeholder="Project Address" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);"></textarea>
+                                                
                                                 <span class="text-danger error" id="paerror"></span>
 
                                             </div>
                                         </div>
                                        
                                         <div class="col-md-5 col-sm-12 col-lg-5 col-sm-12">
-                                            <div class="form-floating mb-3">
-                                                <textarea class="form-control" id="client_document" name="client_document" placeholder="Enter Address" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="100"></textarea>
+                                           <div class="form-group mb-3">
                                                 <label for="address">Client Documents</label>
+                                                <textarea class="form-control" id="client_document" name="client_document" placeholder="Client Documents" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);"></textarea>
                                                 <span class="text-danger error" id="cderror"></span>
 
                                             </div>
@@ -477,6 +478,20 @@
                 $.each(data.data,function(index,row){
                     if(row.enq_status != "Converted")
                     {
+                        //date convert into dd/mm/yyyy
+                        function formatDate (input) {
+                            var datePart = input.match(/\d+/g),
+                            year = datePart[0].substring(0), // get only two digits
+                            month = datePart[1], day = datePart[2];
+                            return day+'-'+month+'-'+year;
+                        }
+
+                        if(row.enq_date != null){
+                            var enq_date = formatDate (row.enq_date); // "18/01/10"
+                        }else{
+                            var enq_date = " - "
+                        }
+
                         if(row.project_type == "Architecture")
                         {
                             content +="<tr>";
@@ -498,7 +513,11 @@
                                 content +="<td><span class='badge badge-soft-danger'>"+row.enq_status+"</span></td>";
                             }
                             content +="<td>"+row.project_name+"</td>";
-                            content +="<td>"+row.pr_head_con_name+"</td>";
+                            if(row.pr_head_con_name != null){
+                                content +="<td>"+row.pr_head_con_name+"</td>";
+                            }else{
+                                content +="<td> - </td>";
+                            }
                             content +="<td>";
                                 $.each(row.tm_obj,function(key,value){
                                     content +=value.name+", ";
@@ -513,11 +532,24 @@
                             // content +="<td>"+row.team_member_conceptual+"</td>";
                             // content +="<td>"+row.site_supervisor+"</td>";
                             content +="<td>"+row.client_name+"</td>";
-                            content +="<td>"+row.pr_address+"</td>";
+
+                            if(row.pr_address != null){
+                                content +="<td>"+row.pr_address+"</td>";
+                            }else{
+                                content +="<td> - </td>";
+                            }
+
                             content +="<td>"+row.client_requirement+"</td>";
-                            content +="<td>"+row.client_document+"</td>";
+
+                            if(row.client_document != null){
+                                content +="<td>"+row.client_document+"</td>";
+                            }else{
+                                content +="<td> - </td>";
+                            }
+
+
                             content +="<td>"+row.client_ph_no+"</td>";
-                            content +="<td>"+row.enq_date+"</td>";
+                            content +="<td>"+enq_date+"</td>";
                             content +="<td>"+row.project_type+"</td>";
                             content += "</tr>";
                         }
@@ -547,7 +579,12 @@
                                 content1 +="<td><span class='badge badge-soft-danger'>"+row.enq_status+"</span></td>";
                             }
                             content1 +="<td>"+row.project_name+"</td>";
-                            content1 +="<td>"+row.pr_head_con_name+"</td>";
+                            if(row.pr_head_con_name != null){
+                                content1 +="<td>"+row.pr_head_con_name+"</td>";
+                            }else{
+                                content1 +="<td> - </td>";
+                            }
+
                             content1 +="<td>";
                                 $.each(row.tm_obj,function(key,value){
                                     content1 +=value.name+", ";
@@ -559,14 +596,28 @@
                                     content1 +=value.name+", ";
                                 });
                             content1 +="</td>";
+
                             // content1 +="<td>"+row.team_member_conceptual+"</td>";
                             // content1 +="<td>"+row.site_supervisor+"</td>";
+
                             content1 +="<td>"+row.client_name+"</td>";
-                            content1 +="<td>"+row.pr_address+"</td>";
+
+                            if(row.pr_address != null){
+                                content1 +="<td>"+row.pr_address+"</td>";
+                            }else{
+                                content1 +="<td> - </td>";
+                            }
+
                             content1 +="<td>"+row.client_requirement+"</td>";
-                            content1 +="<td>"+row.client_document+"</td>";
+
+                            if(row.client_document != null){
+                                content1 +="<td>"+row.client_document+"</td>";
+                            }else{
+                                content1 +="<td> - </td>";
+                            }
+
                             content1 +="<td>"+row.client_ph_no+"</td>";
-                            content1 +="<td>"+row.enq_date+"</td>";
+                            content1 +="<td>"+enq_date+"</td>";
                             content1 +="<td>"+row.project_type+"</td>";
                             content1 += "</tr>";
                         }
@@ -596,7 +647,11 @@
                                 content2 +="<td><span class='badge badge-soft-danger'>"+row.enq_status+"</span></td>";
                             }
                             content2 +="<td>"+row.project_name+"</td>";
-                            content2 +="<td>"+row.pr_head_con_name+"</td>";
+                            if(row.pr_head_con_name != null){
+                                content2 +="<td>"+row.pr_head_con_name+"</td>";
+                            }else{
+                                content2 +="<td> - </td>";
+                            }
                             content2 +="<td>";
                                 $.each(row.tm_obj,function(key,value){
                                     content2 +=value.name+", ";
@@ -611,11 +666,22 @@
                             // content2 +="<td>"+row.team_member_conceptual+"</td>";
                             // content2 +="<td>"+row.site_supervisor+"</td>";
                             content2 +="<td>"+row.client_name+"</td>";
-                            content2 +="<td>"+row.pr_address+"</td>";
+
+                            if(row.pr_address != null){
+                                content2 +="<td>"+row.pr_address+"</td>";
+                            }else{
+                                content2 +="<td> - </td>";
+                            }
+
                             content2 +="<td>"+row.client_requirement+"</td>";
-                            content2 +="<td>"+row.client_document+"</td>";
+
+                            if(row.client_document != null){
+                                content2 +="<td>"+row.client_document+"</td>";
+                            }else{
+                                content2 +="<td> - </td>";
+                            }
                             content2 +="<td>"+row.client_ph_no+"</td>";
-                            content2 +="<td>"+row.enq_date+"</td>";
+                            content2 +="<td>"+enq_date+"</td>";
                             content2 +="<td>"+row.project_type+"</td>";
                             content2 += "</tr>";
                         }
@@ -645,7 +711,11 @@
                                 content3 +="<td><span class='badge badge-soft-danger'>"+row.enq_status+"</span></td>";
                             }
                             content3 +="<td>"+row.project_name+"</td>";
-                            content3 +="<td>"+row.pr_head_con_name+"</td>";
+                            if(row.pr_head_con_name != null){
+                                content3 +="<td>"+row.pr_head_con_name+"</td>";
+                            }else{
+                                content3 +="<td> - </td>";
+                            }
                             content3 +="<td>";
                                 $.each(row.tm_obj,function(key,value){
                                     content3 +=value.name+", ";
@@ -660,11 +730,21 @@
                             // content3 +="<td>"+row.team_member_conceptual+"</td>";
                             // content3 +="<td>"+row.site_supervisor+"</td>";
                             content3 +="<td>"+row.client_name+"</td>";
-                            content3 +="<td>"+row.pr_address+"</td>";
+                            if(row.pr_address != null){
+                                content3 +="<td>"+row.pr_address+"</td>";
+                            }else{
+                                content3 +="<td> - </td>";
+                            }
+
                             content3 +="<td>"+row.client_requirement+"</td>";
-                            content3 +="<td>"+row.client_document+"</td>";
+
+                            if(row.client_document != null){
+                                content3 +="<td>"+row.client_document+"</td>";
+                            }else{
+                                content3 +="<td> - </td>";
+                            }
                             content3 +="<td>"+row.client_ph_no+"</td>";
-                            content3 +="<td>"+row.enq_date+"</td>";
+                            content3 +="<td>"+enq_date+"</td>";
                             content3 +="<td>"+row.project_type+"</td>";
                             content3 += "</tr>";
                         }
@@ -694,7 +774,11 @@
                                 content4 +="<td><span class='badge badge-soft-danger'>"+row.enq_status+"</span></td>";
                             }
                             content4 +="<td>"+row.project_name+"</td>";
-                            content4 +="<td>"+row.pr_head_con_name+"</td>";
+                            if(row.pr_head_con_name != null){
+                                content4 +="<td>"+row.pr_head_con_name+"</td>";
+                            }else{
+                                content4 +="<td> - </td>";
+                            }
                             content4 +="<td>";
                                 $.each(row.tm_obj,function(key,value){
                                     content4 +=value.name+", ";
@@ -709,11 +793,21 @@
                             // content4 +="<td>"+row.team_member_conceptual+"</td>";
                             // content4 +="<td>"+row.site_supervisor+"</td>";
                             content4 +="<td>"+row.client_name+"</td>";
-                            content4 +="<td>"+row.pr_address+"</td>";
+                            if(row.pr_address != null){
+                                content4 +="<td>"+row.pr_address+"</td>";
+                            }else{
+                                content4 +="<td> - </td>";
+                            }
+
                             content4 +="<td>"+row.client_requirement+"</td>";
-                            content4 +="<td>"+row.client_document+"</td>";
+
+                            if(row.client_document != null){
+                                content4 +="<td>"+row.client_document+"</td>";
+                            }else{
+                                content4 +="<td> - </td>";
+                            }
                             content4 +="<td>"+row.client_ph_no+"</td>";
-                            content4 +="<td>"+row.enq_date+"</td>";
+                            content4 +="<td>"+enq_date+"</td>";
                             content4 +="<td>"+row.project_type+"</td>";
                             content4 += "</tr>";
                         }
@@ -1045,27 +1139,32 @@
             var team_member_conceptual= $(this).data('team_member_conceptual');
             var site_supervisor= $(this).data('site_supervisor');
 
-            // alert(lead_technician);
-            var r=new Array();
-            if (team_member_conceptual.toString().indexOf(',')>-1)
-            { 
-                var r=team_member_conceptual.split(',');
-            }
-            else
+            if(team_member_conceptual != null)
             {
-                r[0]=team_member_conceptual.toString();
+                // alert(lead_technician);
+                var r=new Array();
+                if (team_member_conceptual.toString().indexOf(',')>-1)
+                { 
+                    var r=team_member_conceptual.split(',');
+                }
+                else
+                {
+                    r[0]=team_member_conceptual.toString();
+                }
             }
-
-            var r1=new Array();
-            if (site_supervisor.toString().indexOf(',')>-1)
-            { 
-                var r1=site_supervisor.split(',');
-            }
-            else
+            
+            if(site_supervisor != null)
             {
-                r1[0]=site_supervisor.toString();
+                var r1=new Array();
+                if (site_supervisor.toString().indexOf(',')>-1)
+                { 
+                    var r1=site_supervisor.split(',');
+                }
+                else
+                {
+                    r1[0]=site_supervisor.toString();
+                }
             }
-
             // ACTIVE PANE AND LINK
             $('.nav-tabs a[href="#update_enquiry"]').tab('show');
 

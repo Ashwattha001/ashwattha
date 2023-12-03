@@ -321,7 +321,7 @@
                                         <?php $tdate=date("Y-m-d");?>
                                         <div class="col-md-2 col-sm-12 col-lg-2">
                                             <div class="form-floating mb-3">
-                                                <input type="date" class="form-control" id="end_date" placeholder="Task End Date" name="end_date" required max="{{$tdate}}" value="{{$tdate}}">
+                                                <input type="date" class="form-control" id="end_date" placeholder="Task End Date" name="end_date" required min="{{$tdate}}" value="{{$tdate}}">
                                                 <label for="end_date">Task End Date<sup class="text-danger">*</sup></label>
                                                 <span class="text-danger error" id="ederror"></span>
                                             </div>
@@ -334,9 +334,13 @@
                                                 <span class="text-danger error" id="trerror"></span>
                                             </div>  
                                         </div> -->
-                                        <div class="col-md-5 col-sm-12 col-lg-5">   
-                                            <textarea  id="summernote" name="task_remark"></textarea>
-                                            <span class="text-danger error" id="trerror"></span>
+                                        <div class="col-md-5 col-sm-12 col-lg-5"> 
+                                            <div class="form-group mb-3">
+                                                <label for="emp_remark">Task to be assign</label>  
+                                                <textarea  id="summernote" name="task_remark"></textarea>
+                                                <span class="text-danger error" id="trerror"></span>
+                                            
+                                            </div>
                                         </div>
                                         <div class="col-md-5 col-sm-12 col-lg-5 emp_remark">
                                             <div class="form-group mb-3">
@@ -364,7 +368,7 @@
                                         </div>
                                     </div> 
                                     <div class="d-sm-flex flex-wrap">
-                                        <h4 class="card-title mb-4"></h4>
+                                       
                                         <div class="ms-auto">
                                             <button type="button" class="btn btn-primary waves-effect waves-light submit_btn" id="add_task"><i class="bx font-size-16 align-middle me-2 add_task"></i>Add</button>
                                         </div>
@@ -760,7 +764,7 @@
         $('.emp_remark').hide();
         // $('.role_wise').hide();
         $("#summernote").summernote("code", "");
-
+        $('#summernote').summernote('enable');
         $('#project_type,#team_member').prop('disabled', false);
         getTask();
     });
@@ -930,17 +934,17 @@
         var emp_remark = $('#emp_remark').val();
 
         if(edit_id != ""){
-            if(role == 2 || role == 3 || role == 1)
-            {
+            // if(role == 2 || role == 3 || role == 1)
+            // {
                 if(emp_remark == "")
                 {
                     m = 6;
                 }else{
                     m = 7;
                 }
-            }else{
-                m = 6;
-            }
+            // }else{
+            //     m = 6;
+            // }
         }
         else{
             m = 7;
@@ -1047,7 +1051,7 @@
                 $.each(response.data,function(index,row){
 
                     //get project type wise project records
-                    $('#task_project').append("<option value='"+row.id+"'>"+row.enquiry_no+" ("+row.project_name+")</option>");
+                    $('#task_project').append("<option value='"+row.id+"'>"+row.converted_no+" ("+row.project_name+")</option>");
                                     
                 });
             },
@@ -1118,16 +1122,21 @@
         if(au_id == assign_id){
             $('.emp_remark').hide();
             $('#summernote,#task_date,#end_date').prop('readonly', false);
+            $('#summernote').summernote('enable');
         }else{
         
             $('.emp_remark').show();
 
             if(role == 0){
+
                 $('#summernote,#task_date,#end_date,#emp_remark').prop('readonly', true);
                 $('#add_task').hide();
-            }else{
-                $('#summernote,#task_date,#end_date').prop('readonly', true);
+                $('#summernote').summernote('disable');
 
+            }else{
+
+                $('#summernote,#task_date,#end_date').prop('readonly', true);
+                $('#summernote').summernote('disable');
             }
            
         }
@@ -1170,7 +1179,13 @@
             $('#project_name').val(enqNo_name); 
             $("#project_type").val(project_type).trigger("change");             
             $('#team_member option[value='+team_member+']').attr('selected','selected').change();
-            $("#task_status").val(task_status).trigger("change"); 
+            if(role == 0){
+                $("#task_status").val("Alloted").trigger("change"); 
+            }else{
+                $("#task_status").val(task_status).trigger("change"); 
+            }
+
+            
             $('#task_project option[value='+enq_pr_id+']').attr('selected','selected').change();
         }
 

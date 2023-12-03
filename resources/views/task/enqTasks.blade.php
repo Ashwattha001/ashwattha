@@ -335,9 +335,13 @@
                                             </div>  
                                         </div> -->
 
-                                        <div class="col-md-5 col-sm-12 col-lg-5">   
-                                            <textarea  id="summernote" name="task_remark"></textarea>
-                                            <span class="text-danger error" id="trerror"></span>
+                                        <div class="col-md-5 col-sm-12 col-lg-5">  
+                                            <div class="form-group mb-3">
+                                                <label for="emp_remark">Task to be assign</label>   
+                                                <textarea  id="summernote" name="task_remark"></textarea>
+                                                <span class="text-danger error" id="trerror"></span>
+                                                
+                                            </div>
                                         </div>
 
                                         <div class="col-md-5 col-sm-12 col-lg-5 emp_remark">
@@ -761,6 +765,7 @@
         $("#summernote").summernote("code", "");
 
         $('#project_type,#team_member').prop('disabled', false);
+        $('#summernote').summernote('enable');
         getTask();
         
     });
@@ -930,17 +935,17 @@
         var emp_remark = $('#emp_remark').val();
         // alert(role);
         if(edit_id != ""){
-            if(role == 2 || role == 3 || role == 1)
-            {
+            // if(role == 2 || role == 3 || role == 1)
+            // {
                 if(emp_remark == "")
                 {
                     m = 6;
                 }else{
                     m = 7;
                 }
-            }else{
-                m = 6;
-            }
+            // }else{
+            //     m = 6;
+            // }
           
         }
         else{
@@ -1119,6 +1124,7 @@
         if(au_id == assign_id){
             $('.emp_remark').hide();
             $('#summernote,#task_date,#end_date').prop('readonly', false);
+            $('#summernote').summernote('enable');
         }else{
         
             $('.emp_remark').show();
@@ -1126,9 +1132,10 @@
             if(role == 0){
                 $('#summernote,#task_date,#end_date,#emp_remark').prop('readonly', true);
                 $('#add_task').hide();
+                $('#summernote').summernote('disable');
             }else{
                 $('#summernote,#task_date,#end_date').prop('readonly', true);
-
+                $('#summernote').summernote('disable');
             }
            
         }
@@ -1172,7 +1179,11 @@
             $('#project_name').val(enqNo_name); 
             $("#project_type").val(project_type).trigger("change");             
             $('#team_member option[value='+team_member+']').attr('selected','selected').change();
-            $("#task_status").val(task_status).trigger("change"); 
+            if(role == 0){
+                $("#task_status").val("Alloted").trigger("change"); 
+            }else{
+                $("#task_status").val(task_status).trigger("change"); 
+            }
             $('#task_project option[value='+enq_pr_id+']').attr('selected','selected').change();
         }
 

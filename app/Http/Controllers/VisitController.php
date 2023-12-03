@@ -30,12 +30,16 @@ class VisitController extends Controller
 
 
         //get visit records
+
         $data=DB::table('site_visits as sv')
                 ->leftjoin('projects as p','p.id','sv.pr_id')
                 ->leftjoin('users as u','u.id','sv.u_id')
-                ->select('sv.id','sv.project_type','sv.visit_date','sv.pr_id','sv.stage_contr','sv.attendees','sv.delete','sv.a_id','p.project_name','p.contractor','u.name')
-                ->where(['sv.delete'=>0])
-                ->get();
+                ->select('sv.id','sv.project_type','sv.visit_date','sv.pr_id','sv.stage_contr','sv.visit_no','sv.attendees','sv.delete','sv.a_id','p.project_name','p.contractor','u.name')
+                ->where(['sv.delete'=>0]);
+                if($roles !=0){
+                    $data =$data->where('sv.a_id',$a_id);
+                }
+                 $data = $data->get();
 
         // foreach($data as $d){
         
@@ -55,7 +59,7 @@ class VisitController extends Controller
 
     }
 
-    public function postVisitReport(Request $req) // UPDATED.. ADD NEW PO FROM PO LIST
+    public function postVisitReport(Request $req)
     {
         $a_id=Session::get('USER_ID');
         $visit_date=isset($_POST['visit_date']) ? $_POST['visit_date'] : '';
@@ -92,6 +96,9 @@ class VisitController extends Controller
             $csv_obj->delete=0;
             $csv_obj->a_id=$a_id;
             $res=$csv_obj->update();
+
+            $visit_count = SiteVisitModel::where(['delete'=>0,'id'=>$visit_id])->update(['visit_no'=>$csv_obj->visit_count]);
+
         }else{
             $csv_obj=new CountSiteVisitModel();
             $csv_obj->project_type=$project_type;
@@ -100,10 +107,12 @@ class VisitController extends Controller
             $csv_obj->delete=0;
             $csv_obj->a_id=$a_id;
             $res=$csv_obj->save();
+
+            $visit_count = SiteVisitModel::where(['delete'=>0,'id'=>$visit_id])->update(['visit_no'=>$csv_obj->visit_count]);
         }
 
        
-        
+       
         return redirect()->route('add.visit.instruction',$visit_id);
     }
 
@@ -113,12 +122,11 @@ class VisitController extends Controller
         $sv_obj=DB::table('site_visits as sv')
                 ->leftjoin('projects as p','p.id','sv.pr_id')
                 ->leftjoin('users as u','u.id','sv.u_id')
-                ->select('sv.id','sv.project_type','sv.visit_date','sv.pr_id','sv.stage_contr','sv.delete','sv.a_id','p.project_name','p.contractor','u.name')
+                ->select('sv.id','sv.project_type','sv.visit_date','sv.attendees','sv.pr_id','sv.stage_contr','sv.delete','sv.a_id','sv.visit_no','p.project_name','p.contractor','u.name')
                 ->where(['sv.id'=>$visit_id])
                 ->get();
 
         $icount=VisitInstructionModel::where(['delete'=>0,'site_visit_id'=>$visit_id])->count();
-
         return view('visit.visit_add',compact('sv_obj','visit_id','icount'));
     }
 
@@ -253,6 +261,8 @@ class VisitController extends Controller
     public function generateVisitPDF($visit_id)
     {
         $a_id=Session::get('USER_ID');
+        $attendees=isset($_POST['attendees']) ? $_POST['attendees'] : '';
+        $site_vobj = SiteVisitModel::where(['delete'=>0,'id'=>$visit_id])->update(['attendees'=>$attendees]);
 
         $sv_obj=DB::table('site_visits as sv')
             ->leftjoin('projects as p','p.id','sv.pr_id')

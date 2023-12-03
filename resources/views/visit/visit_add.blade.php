@@ -123,7 +123,13 @@
                         <div class="mt-3 icountpdf">
                             {!! Form::open(['class'=>"form-horizontal",'method'=>"post",'url'=>"generate_visit_pdf/$visit_id",'id'=>'generate_visit_form']) !!}
                             <div class="row">                               
-
+                                <div class="col-md-6 col-sm-6 col-lg-6">
+                                    <div class="form-floating mb-3">
+                                        <input type="text" class="form-control" id="attendees" placeholder="Enter Attendees" name="attendees" required onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" value="{{$sv_obj[0]->attendees}}">
+                                        <label for="attendees">Attendees</label>
+                                        <span class="text-danger error" id="aterror"></span>
+                                    </div>
+                                </div>
                             </div>
                                 <div class="ms-auto">
 
@@ -171,7 +177,7 @@
                     <div class="col-md-12 col-sm-12 col-lg-12">
                         <div class="form-group mb-3">
                             <label for="instructions">Instructions</label>
-                            <textarea class="form-control " id="instructions" name="instructions" rows="2" placeholder="Enter Instruction" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);"></textarea>
+                            <textarea class="form-control " id="instructions" name="instructions" rows="4" placeholder="Enter Instruction" onkeyup=" var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);"></textarea>
                             <span class="text-danger error" id="ierror"></span>
                         </div>  
                     </div>

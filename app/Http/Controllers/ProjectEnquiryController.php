@@ -36,16 +36,20 @@ class ProjectEnquiryController extends Controller
         //for all supervisor
         $ssupervisor_obj=UserModel::where(['delete'=>0,'role'=>3,'is_active'=>0])->orderby('created_at','DESC')->get();
 
-        //get peoject records
-        $data=DB::table('projects as pr')
+            //get peoject records
+            $data=DB::table('projects as pr')
             ->leftjoin('users as u','u.id','pr.a_id')
             ->select('pr.id','pr.enquiry_no','pr.project_name','pr.client_ph_no','pr.client_name','pr.enq_date','pr.project_type','pr.client_requirement','pr.pr_address','pr.client_document','pr.pr_head_conceptual','pr.team_member_conceptual','pr.site_supervisor','pr.enq_status','pr.a_id','pr.updated_at','pr.delete','pr.enq_status','u.name as ','u.delete as u_delete','u.is_active')
             ->where(['pr.delete'=>0])
-            ->orderby('pr.updated_at','DESC')
-            ->get();
-
+            ->orderby('pr.updated_at','DESC');
+            
+            if($roles == 1){
+                $data = $data->where('pr_head_conceptual', $a_id);
+            }
+            $data = $data->get();
+            
             foreach($data as $d){
-               
+            
                 // get name pr head conceptual
                 $u_obj1=UserModel::where(['delete'=>0,'role'=>1,'id'=>$d->pr_head_conceptual])->orderby('created_at','DESC')->get();
                 foreach($u_obj1 as $u){
@@ -63,8 +67,7 @@ class ProjectEnquiryController extends Controller
             
                 $d->ss_obj = $ss_obj;
             }
-
-
+       
         if(!empty($data)){
             return json_encode(array('status' => true ,'data' => $data,'prhead_obj' => $prhead_obj,'employee_obj' => $employee_obj,'ssupervisor_obj' => $ssupervisor_obj,'roles' => $roles ,'message' => 'Data Found'));
         }else{
@@ -88,9 +91,13 @@ class ProjectEnquiryController extends Controller
         $client_document = $req->get('client_document');
         $pr_head_conceptual = $req->get('pr_head_conceptual');                  // Project Head Conceptual
         $team_member_conceptual = $req->get('team_member_conceptual');          // Team Member Conceptual
-        $team_member_conceptual=implode(',',$team_member_conceptual);           // Team Member Conceptual store comma separated
-        $supervisor = $req->get('supervisor');                                  // Supervisor Conceptual
-        $site_supervisor=implode(',',$supervisor);                              // Supervisor Conceptual store comma separated
+        if($team_member_conceptual != null){
+            $team_member_conceptual=implode(',',$team_member_conceptual);           // Team Member Conceptual store comma separated
+        }
+        $site_supervisor = $req->get('supervisor');                                  // Supervisor Conceptual
+        if($site_supervisor != null){
+            $site_supervisor=implode(',',$site_supervisor);                              // Supervisor Conceptual store comma separated
+        }
         $enq_status = $req->get('enq_status');
 
     	$a_id=Session::get('USER_ID');

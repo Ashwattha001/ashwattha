@@ -142,6 +142,7 @@
                                                 <th scope="col" style="width: 20px;">Sr.No</th>
                                                 <th scope="col" style="width: 100px">Visit Date</th>
                                                 <th scope="col">Action</th>
+                                                <th scope="col" style="white-space: normal;">Visit No</th>
                                                 <th scope="col" style="white-space: normal;">Visit By</th>
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Contractor</th>
@@ -164,6 +165,7 @@
                                                 <th scope="col" style="width: 20px;">Sr.No</th>
                                                 <th scope="col" style="width: 100px">Visit Date</th>
                                                 <th scope="col">Action</th>
+                                                <th scope="col" style="white-space: normal;">Visit No</th>
                                                 <th scope="col" style="white-space: normal;">Visit By</th>
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Contractor</th>
@@ -185,6 +187,7 @@
                                                 <th scope="col" style="width: 20px;">Sr.No</th>
                                                 <th scope="col" style="width: 100px">Visit Date</th>
                                                 <th scope="col">Action</th>
+                                                <th scope="col" style="white-space: normal;">Visit No</th>
                                                 <th scope="col" style="white-space: normal;">Visit By</th>
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Contractor</th>
@@ -207,6 +210,7 @@
                                                 <th scope="col" style="width: 20px;">Sr.No</th>
                                                 <th scope="col" style="width: 100px">Visit Date</th>
                                                 <th scope="col">Action</th>
+                                                <th scope="col" style="white-space: normal;">Visit No</th>
                                                 <th scope="col" style="white-space: normal;">Visit By</th>
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Contractor</th>
@@ -229,6 +233,7 @@
                                                 <th scope="col" style="width: 20px;">Sr.No</th>
                                                 <th scope="col" style="width: 100px">Visit Date</th>
                                                 <th scope="col">Action</th>
+                                                <th scope="col" style="white-space: normal;">Visit No</th> 
                                                 <th scope="col" style="white-space: normal;">Visit By</th>
                                                 <th scope="col" style="white-space: normal;">Project Name</th>
                                                 <th scope="col" style="width: 100px">Contractor</th>
@@ -305,7 +310,7 @@
 
                     <div class="col-md-12 col-sm-12 col-lg-12">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="attendees" placeholder="Enter Attendees" name="attendees" required onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
+                            <input type="text" class="form-control" id="attendees" placeholder="Enter Attendees" name="attendees" required onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);">
                             <label for="attendees">Attendees</label>
                             <span class="text-danger error" id="aterror"></span>
                         </div>
@@ -414,6 +419,13 @@
                             }
                            
                         content += "</td>";
+                        if(row.visit_no != null){
+                            content +="<td>"+row.visit_no+"</td>";
+
+                        }else{
+                            content +="<td>-</td>";
+                        }
+
                         content +="<td>"+row.name+"</td>";
                         content +="<td>"+row.project_name+"</td>";
                         if(row.contractor != null){

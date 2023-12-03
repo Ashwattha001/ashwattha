@@ -41,8 +41,13 @@ class ConvertedProjectController extends Controller
             ->leftjoin('users as u','u.id','pr.a_id')
             ->select('pr.id','pr.enquiry_no','pr.project_name','pr.client_ph_no','pr.client_name','pr.converted_date','pr.project_type','pr.client_requirement','pr.pr_address','pr.client_document','pr.pr_head_conceptual','pr.team_member_conceptual','pr.site_supervisor','pr.enq_status','pr.a_id','pr.updated_at','pr.delete','pr.converted_no','pr.converted_status','pr.pr_head_working','pr.team_member_working','pr.ar_plot','pr.constr_area','pr.consultants','pr.contractor','u.name','u.delete as u_delete','u.is_active')
             ->where(['pr.delete'=>0,'pr.enq_status'=>"Converted"])
-            ->orderby('pr.updated_at','DESC')
-            ->get();
+            ->orderby('pr.updated_at','DESC');
+
+            if ($roles == 1) {
+                $data = $data->where('pr.pr_head_conceptual', $a_id)->orWhere('pr.pr_head_working', $a_id);
+            }
+
+            $data = $data->get();
 
             foreach($data as $d){
                

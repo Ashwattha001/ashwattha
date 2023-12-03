@@ -27,14 +27,13 @@ use App\Http\Controllers\CalendarController;
 */
 
 Route::get('/', [LoginController::class, 'login'])->name('login.page');
-Route::get('/dashboard', [LoginController::class, 'index'])->name('dashboard');
-Route::get('/get_schedules', [CalendarController::class, 'getSchedules']);
+
 
 Route::post('/checkLogin', [LoginController::class, 'check_login']);
 Route::group(['middleware' => 'login'], function () 
 {
     // DASHBOARD
-    // Route::get('/dashboard', [LoginController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [LoginController::class, 'index'])->name('dashboard');
 
     Route::get('/logout', function(){
 
@@ -105,6 +104,7 @@ Route::group(['middleware' => 'login'], function ()
     Route::get('/get-conv-tasks', [TaskController::class, 'getConvTasks']);
     Route::get('/delete-conv-task', [TaskController::class, 'deleteConvTask']);
 
+    //Visit Management
     Route::get('/visit_manage', [VisitController::class, 'visitManage'])->name('visit_manage.page');
     Route::post('/post_visit_report', [VisitController::class, 'postVisitReport']);  
     Route::get('/add_visit/{id}', [VisitController::class, 'addVisit'])->name('add.visit.instruction'); 
@@ -115,7 +115,10 @@ Route::group(['middleware' => 'login'], function ()
     Route::get('/delete-instruc', [VisitController::class, 'deleteInstruc']);
     Route::post('/generate_visit_pdf/{id}', [VisitController::class, 'generateVisitPDF']);
 
+    //Schedular
     Route::post('/create_schedule', [CalendarController::class, 'createSchedule']);  
-    // Route::get('/get_schedules', [CalendarController::class, 'getSchedules']);
+    Route::get('/get_schedules', [CalendarController::class, 'getSchedules']);
+    Route::post('/delete_schedules', [CalendarController::class, 'deleteSchedule']);  
+
 
 }); 

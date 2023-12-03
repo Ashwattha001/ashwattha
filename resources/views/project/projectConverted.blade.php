@@ -381,30 +381,31 @@
                                         </div>
                                         
                                         <div class="col-md-12 col-sm-12 col-lg-12 col-sm-12">
-                                            <div class="form-floating mb-3">
-                                                <textarea class="form-control" id="client_req" required name="client_req" placeholder="Client Requirement" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="100"></textarea>
+                                            <div class="form-group mb-3">
                                                 <label for="client_req">Client Requirement<sup class="text-danger">*</sup></label>
+                                                <textarea class="form-control" id="client_req" required name="client_req" placeholder="Client Requirement" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);"></textarea>
                                                 <span class="text-danger error" id="crerror"></span>
 
                                             </div>
                                         </div>
                                         <div class="col-md-5 col-sm-12 col-lg-5 col-sm-12">
-                                            <div class="form-floating mb-3">
-                                                <textarea class="form-control" id="project_address" name="project_address" placeholder="Enter Address" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="100"></textarea>
+                                            <div class="form-group mb-3">
                                                 <label for="project_address">Project Address</label>
+                                                <textarea class="form-control" id="project_address" name="project_address" placeholder="Project Address" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);"></textarea>
                                                 <span class="text-danger error" id="paerror"></span>
 
                                             </div>
                                         </div>
                                        
                                         <div class="col-md-5 col-sm-12 col-lg-5 col-sm-12">
-                                            <div class="form-floating mb-3">
-                                                <textarea class="form-control" id="client_document" name="client_document" placeholder="Enter Address" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="100"></textarea>
+                                            <div class="form-group mb-3">
                                                 <label for="address">Client Documents</label>
+                                                <textarea class="form-control" id="client_document" name="client_document" placeholder="Client Documents" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" ></textarea>
                                                 <span class="text-danger error" id="cderror"></span>
 
                                             </div>
                                         </div>
+
                                         <div class="col-md-2 col-sm-12 col-lg-2">
                                             <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" id="ar_plot" placeholder="Enter Area of Plot" name="ar_plot" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
@@ -412,6 +413,7 @@
                                                 <span class="text-danger error" id="aperror"></span>
                                             </div>
                                         </div>
+
                                         <div class="col-md-3 col-sm-12 col-lg-3">
                                             <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" id="constr_area" placeholder="Enter Costruction Area" name="constr_area" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
@@ -419,6 +421,7 @@
                                                 <span class="text-danger error" id="caerror"></span>
                                             </div>
                                         </div>
+
                                         <div class="col-md-3 col-sm-12 col-lg-3">
                                             <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" id="consultant" placeholder="Enter Consultants" name="consultant" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
@@ -426,6 +429,7 @@
                                                 <span class="text-danger error" id="conerror"></span>
                                             </div>
                                         </div>
+
                                         <div class="col-md-3 col-sm-12 col-lg-3">
                                             <div class="form-floating mb-3">
                                                 <input type="text" class="form-control" id="contractor" placeholder="Enter Contractor" name="contractor" onkeyup="var start = this.selectionStart;var end = this.selectionEnd;this.value = this.value.toUpperCase();this.setSelectionRange(start, end);" maxlength="50">
@@ -433,6 +437,7 @@
                                                 <span class="text-danger error" id="cnterror"></span>
                                             </div>
                                         </div>
+
                                         <div class="col-md-3 col-sm-12 col-lg-3">
                                             <div class="form-group mb-3">
                                                 <label for="pr_head_conceptual" class="form-label" style="font-size: 11px;margin-bottom: 2px;">Project Head (Conceptual)</label>
@@ -452,6 +457,7 @@
                                                 <span class="text-danger error" id="tmcerror"></span>
                                             </div>
                                         </div>
+
                                         <div class="col-md-2 col-sm-12 col-lg-2">
                                             <div class="form-group mb-3">
                                                 <label for="pr_head_working" class="form-label" style="font-size: 11px;margin-bottom: 2px;">Project Head (Working)</label>
@@ -575,6 +581,20 @@
                 $.each(data.data,function(index,row){
                     if(row.enq_status == "Converted")
                     {
+                        //date convert into dd/mm/yyyy
+                        function formatDate (input) {
+                            var datePart = input.match(/\d+/g),
+                            year = datePart[0].substring(0), // get only two digits
+                            month = datePart[1], day = datePart[2];
+                            return day+'-'+month+'-'+year;
+                        }
+
+                        if(row.converted_date != null){
+                            var converted_date = formatDate (row.converted_date); // "18/01/10"
+                        }else{
+                            var converted_date = " - "
+                        }
+
                         if(row.project_type == "Architecture")
                         {
                             content +="<tr>";
@@ -640,11 +660,9 @@
                             content +="<td>"+row.client_requirement+"</td>";
                             content +="<td>"+row.client_document+"</td>";
                             content +="<td>"+row.client_ph_no+"</td>";
-                            if(row.converted_date == null){
-                                content +="<td> - </td>";
-                            }else{
-                                content +="<td>"+row.converted_date+"</td>";
-                            }
+
+                            content +="<td>"+converted_date+"</td>";
+                            
 
                             if(row.ar_plot != null){
                                 content +="<td>"+row.ar_plot+"</td>";
@@ -739,11 +757,7 @@
                             content1 +="<td>"+row.client_requirement+"</td>";
                             content1 +="<td>"+row.client_document+"</td>";
                             content1 +="<td>"+row.client_ph_no+"</td>";
-                            if(row.converted_date == null){
-                                content1 +="<td> - </td>";
-                            }else{
-                                content1 +="<td>"+row.converted_date+"</td>";
-                            }
+                            content1 +="<td>"+converted_date+"</td>";
 
                             if(row.ar_plot != null){
                                 content1 +="<td>"+row.ar_plot+"</td>";
@@ -838,11 +852,7 @@
                             content2 +="<td>"+row.client_requirement+"</td>";
                             content2 +="<td>"+row.client_document+"</td>";
                             content2 +="<td>"+row.client_ph_no+"</td>";
-                            if(row.converted_date == null){
-                                content2 +="<td> - </td>";
-                            }else{
-                                content2 +="<td>"+row.converted_date+"</td>";
-                            }
+                            content2 +="<td>"+converted_date+"</td>";
 
                             if(row.ar_plot != null){
                                 content2 +="<td>"+row.ar_plot+"</td>";
@@ -937,11 +947,7 @@
                             content3 +="<td>"+row.client_requirement+"</td>";
                             content3 +="<td>"+row.client_document+"</td>";
                             content3 +="<td>"+row.client_ph_no+"</td>";
-                            if(row.converted_date == null){
-                                content3 +="<td> - </td>";
-                            }else{
-                                content3 +="<td>"+row.converted_date+"</td>";
-                            }
+                            content3 +="<td>"+converted_date+"</td>";
 
                             if(row.ar_plot != null){
                                 content3 +="<td>"+row.ar_plot+"</td>";
@@ -1036,11 +1042,7 @@
                             content4 +="<td>"+row.client_requirement+"</td>";
                             content4 +="<td>"+row.client_document+"</td>";
                             content4 +="<td>"+row.client_ph_no+"</td>";
-                            if(row.converted_date == null){
-                                content4 +="<td> - </td>";
-                            }else{
-                                content4 +="<td>"+row.converted_date+"</td>";
-                            }
+                            content4 +="<td>"+converted_date+"</td>";
 
                             if(row.ar_plot != null){
                                 content4 +="<td>"+row.ar_plot+"</td>";

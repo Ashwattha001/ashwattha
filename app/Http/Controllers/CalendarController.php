@@ -13,42 +13,61 @@ class CalendarController extends Controller
 {
     public function createSchedule(Request $req)
     {
-    	$edit_id=empty($req->get('edit_id')) ? null : $req->get('edit_id');
+    	$edit_id=empty($req->get('id')) ? null : $req->get('id');
         $title = $req->get('title');
-   		$start = $req->get('start');
-   		$end = $req->get('end');
+   		$startDate = $req->get('startDate');
+   		$endDate = $req->get('endDate');
+   		$calendarId = $req->get('calendarId');
+        $location = $req->get('location');
        
     	$a_id=Session::get('USER_ID');
 
         if($edit_id!=null)
     	{
-            if($title !='' && $start !='' && $end !='') 
-            {
-                
-                $u_obj=ScheduleModel::find($edit_id);
+
+            $u_obj=ScheduleModel::find($edit_id);
+            if($title != null){
                 $u_obj->title=$title;
-                $u_obj->start=$start;
-                $u_obj->end=$end;
-                $u_obj->a_id=$a_id;
-                $res=$u_obj->update();
-                
-                if($res){
-                    return ['status' => true,'message' => 'Schedule Update Successfully'];
-                }else{
-                   return ['status' => false, 'message' => 'Something went wrong. Please try again.'];
-                }
+            }
+
+            if($startDate != null){
+                $u_obj->start=$startDate;
+            }
+
+            if($endDate != null){
+                $u_obj->end=$endDate;
+            }
+            
+            if($calendarId != null){
+                $u_obj->cal_id=$calendarId;
+            }
+
+            if($location != null){
+                $u_obj->location=$location;
+            }
+            
+            $u_obj->a_id=$a_id;
+            $res=$u_obj->update();
+            
+            if($res){
+                return ['status' => true,'message' => 'Schedule Update Successfully'];
             }else{
-                return ['status' => false, 'message' => 'Please Try Again..']; 
-            }   
+                return ['status' => false, 'message' => 'Something went wrong. Please try again.'];
+            }
+           
 
         }else{    
 
-            if($title !='' && $start !='' && $end !='') 
+            if($title != '' && $startDate != '' && $endDate != '' && $calendarId != '') 
             {
                 $u_obj=new ScheduleModel();
                 $u_obj->title=$title;
-                $u_obj->start=$start;
-                $u_obj->end=$end;
+                $u_obj->start=$startDate;
+                $u_obj->end=$endDate;
+                $u_obj->cal_id=$calendarId;
+                if($location != ""){
+                    $u_obj->location=$location;
+                }
                 $u_obj->delete=0;
                 $u_obj->a_id=$a_id;
                 $res=$u_obj->save();
@@ -56,7 +75,7 @@ class CalendarController extends Controller
 
 
                 if($res){
-                    return ['status' => true,'message' => 'Schedule Add Successfully', 'ids'=>$ids, 'title'=>$title, 'start'=>$start,'end'=>$end];
+                    return ['status' => true,'message' => 'Schedule Add Successfully', 'ids'=>$ids, 'title'=>$title, 'start'=>$startDate,'end'=>$endDate,'location'=>$location];
                 }else{
                    return ['status' => false, 'message' => 'Something went wrong. Please try again.'];
                 }
@@ -70,7 +89,7 @@ class CalendarController extends Controller
     public function getSchedules()
     {
         //for all project Head
-        $data=ScheduleModel::select('id','title','start','end','delete')->where(['delete'=>0])->get();
+        $data=ScheduleModel::select('id','title','start','end','cal_id','delete','location')->where(['delete'=>0])->get();
 
         if(!empty($data)){
             return json_encode(array('status' => true ,'data' => $data,'message' => 'Data Found'));
@@ -78,5 +97,19 @@ class CalendarController extends Controller
             return ['status' => false, 'message' => 'No Data Found'];
         }
     	
+    }
+
+    public function deleteSchedule(Request $req)
+    {
+        $id=$req->get('id');
+        $p_obj=ScheduleModel::find($id);
+        $p_obj->delete=1;
+        $res=$p_obj->update();
+
+        if($res){
+            return ['status' => true, 'message' => 'Schedule Deleted Successfully'];
+        }else{
+           return ['status' => false, 'message' => 'Schedule Deletion Unsuccessfull...!'];
+        }
     }
 }

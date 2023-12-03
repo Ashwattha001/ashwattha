@@ -48,7 +48,7 @@
               <input type="hidden" id="wemp_number" name="emp_number" class="form-control"/>
              
               <strong>Full Name : </strong> <span id="u_name"> - </span><br>
-              <strong>Employee Id : </strong><span id="u_emp_number"> - </span>
+             
             </div>
           </div>
           <hr>

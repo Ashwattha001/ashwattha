@@ -65,164 +65,60 @@ function generateNames() {
     return e;
 }
 
-async function generateRandomSchedule(e, a, o) {
+function generateRandomSchedule(e, a, o) {
     // API HIT
-    try{
-        const response = await $.get(
-            getScheduleUrls
-        );
-        console.log(response)
-    }
-    catch (err){
-        console.log(err);
-    }
-    // $.ajax({
-    //     headers: {
-    //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    //     },
-    //     url: getScheduleUrls,
-    //     type: 'get',
-    //     data: {},
-    //     cache: false,
-    //     dataType: 'json',
-    //     success: function (data) {
+    // try{
+    //     const response = await $.get(
+    //         getScheduleUrls
+    //     );
+    //     console.log(response)
+    // }
+    // catch (err){
+    //     console.log(err);
+    // }
+    $.ajax({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: getScheduleUrls,
+        type: 'get',
+        data: {},
+        cache: false,
+        dataType: 'json',
+        success: function (data) {
 
+            // console.log(data);
             var n;
+           
+            // // console.log(e.id, e.name, a._date, o._date);
+            var  il = 0;
+            $.each(data.data, function (index, row) {
                 var i = new ScheduleInfo();
-                i.id = chance.guid();
-                i.calendarId =e.id;
-                i.title = "hello";
-                i.body = chance.bool({
-                    likelihood: 20,
-                })
-                    ? chance.sentence({
-                        words: 10,
-                    })
-                    : "";
-                // i.isReadOnly = chance.bool({
-                //   likelihood: 20,
-                // });
-            
+                const id = row.id;
+                const title = row.title;
+                // const startDate = row.start;
+                // const endDate = row.end;
+
+                i.id = id;
+                i.calendarId = "1";
+                i.title = title;
+                i.body = "row.body";
                 const startDate = new Date("09/12/2023");
                 const endDate = new Date("09/14/2023");
                 generateTime(i, startDate, endDate);
-                // i.isPrivate = chance.bool({
-                //   likelihood: 10,
-                // });
-                // i.location = chance.address();
-                // i.attendees = chance.bool({
-                //   likelihood: 70,
-                // })
-                //   ? generateNames()
-                //   : [];
-                // i.recurrenceRule = chance.bool({
-                //   likelihood: 20,
-                // })
-                //   ? "repeated events"
-                //   : "";
-                // i.state = chance.bool({
-                //   likelihood: 20,
-                // })
-                //   ? "Free"
-                //   : "Busy";
-                i.color = e.color;
-                i.bgColor = e.bgColor;
-                i.dragBgColor = e.dragBgColor;
-                i.borderColor = e.borderColor;
-                "milestone" === i.category &&
-                    ((i.color = i.bgColor),
-                        (i.bgColor = "transparent"),
-                        (i.dragBgColor = "transparent"),
-                        (i.borderColor = "transparent"));
-                // i.raw.memo = chance.sentence();
-                // i.raw.creator.name = chance.name();
-                // i.raw.creator.avatar = chance.avatar();
-                // i.raw.creator.company = chance.company();
-                // i.raw.creator.email = chance.email();
-                // i.raw.creator.phone = chance.phone();
-                // chance.bool({
-                //   likelihood: 20,
-                // }) && ((n = chance.minute()), (i.goingDuration = n), (i.comingDuration = n));
-                console.log(i);
+
+                i.color = "#556ee6";
+                i.bgColor = "#556ee6";
+                i.dragBgColor = "#556ee6";
+                i.borderColor = "#556ee6";
+            
                 ScheduleList.push(i);
-            // console.log(ScheduleList);
+                // console.log(i);
+                // console.log(ScheduleList);
+            });
 
-
-            // // // console.log(data);
-            // // var n;
-           
-            // // // console.log(e.id, e.name, a._date, o._date);
-            // var  il = 0;
-            // $.each(data.data, function (index, row) {
-            //     var i = new ScheduleInfo();
-            //     const id = row.id;
-            //     const title = row.title;
-            //     // const startDate = row.start;
-            //     // const endDate = row.end;
-
-            //     i.id = id;
-            //     i.calendarId = calendarId;
-            //     i.title = title;
-            //     i.body = "row.body";
-            //     const startDate = new Date("09/12/2023");
-            //     const endDate = new Date("09/14/2023");
-            //     generateTime(i, startDate, endDate);
-
-            //     i.color = "#556ee6";
-            //     i.bgColor = "#556ee6";
-            //     i.dragBgColor = "#556ee6";
-            //     i.borderColor = "#556ee6";
-            //     // "milestone" === "milestone" &&
-            //     //     ((i.color = i.bgColor),
-            //     //         (i.bgColor = "transparent"),
-            //     //         (i.dragBgColor = "transparent"),
-            //     //         (i.borderColor = "transparent"));
-            
-            //     ScheduleList.push(i);
-            //     // console.log(i);
-            //     console.log(ScheduleList);
-
-            // });
-            
-    //     }
-    // });
-
-
-    // i.isReadOnly = chance.bool({
-    //   likelihood: 20,
-    // });
-
-
-    // i.isPrivate = chance.bool({
-    //   likelihood: 10,
-    // });
-    // i.location = chance.address();
-    // i.attendees = chance.bool({
-    //   likelihood: 70,
-    // })
-    //   ? generateNames()
-    //   : [];
-    // i.recurrenceRule = chance.bool({
-    //   likelihood: 20,
-    // })
-    //   ? "repeated events"
-    //   : "";
-    // i.state = chance.bool({
-    //   likelihood: 20,
-    // })
-    //   ? "Free"
-    //   : "Busy";
-
-    // i.raw.memo = chance.sentence();
-    // i.raw.creator.name = chance.name();
-    // i.raw.creator.avatar = chance.avatar();
-    // i.raw.creator.company = chance.company();
-    // i.raw.creator.email = chance.email();
-    // i.raw.creator.phone = chance.phone();
-    // chance.bool({
-    //   likelihood: 20,
-    // }) && ((n = chance.minute()), (i.goingDuration = n), (i.comingDuration = n));
-
+        }
+    });
 }
 
 // function generateRandomSchedule(e, a, o) {
@@ -240,13 +136,155 @@ async function generateRandomSchedule(e, a, o) {
 //             words: 10,
 //         })
 //         : "";
-//     // i.isReadOnly = chance.bool({
-//     //   likelihood: 20,
-//     // });
 
 //     const startDate = new Date("09/12/2023");
 //     const endDate = new Date("09/14/2023");
 //     generateTime(i, startDate, endDate);
+
+//     i.color = e.color;
+//     i.bgColor = e.bgColor;
+//     i.dragBgColor = e.dragBgColor;
+//     i.borderColor = e.borderColor;
+//     "milestone" === i.category &&
+//         ((i.color = i.bgColor),
+//             (i.bgColor = "transparent"),
+//             (i.dragBgColor = "transparent"),
+//             (i.borderColor = "transparent"));
+
+//     // console.log(i);
+//     ScheduleList.push(i);
+// // console.log(ScheduleList);
+
+// }
+
+// async function generateRandomSchedule(e, a, o) {
+//     // API HIT
+//     // try{
+//     //     const response = await $.get(
+//     //         getScheduleUrls
+//     //     );
+//     //     console.log(response)
+//     // }
+//     // catch (err){
+//     //     console.log(err);
+//     // }
+//     // $.ajax({
+//     //     headers: {
+//     //         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+//     //     },
+//     //     url: getScheduleUrls,
+//     //     type: 'get',
+//     //     data: {},
+//     //     cache: false,
+//     //     dataType: 'json',
+//     //     success: function (data) {
+
+//     //         var n;
+//     //             var i = new ScheduleInfo();
+//     //             i.id = chance.guid();
+//     //             i.calendarId =e.id;
+//     //             i.title = "hello";
+//     //             i.body = chance.bool({
+//     //                 likelihood: 20,
+//     //             })
+//     //                 ? chance.sentence({
+//     //                     words: 10,
+//     //                 })
+//     //                 : "";
+//     //             // i.isReadOnly = chance.bool({
+//     //             //   likelihood: 20,
+//     //             // });
+            
+//     //             const startDate = new Date("09/12/2023");
+//     //             const endDate = new Date("09/14/2023");
+//     //             generateTime(i, startDate, endDate);
+//     //             // i.isPrivate = chance.bool({
+//     //             //   likelihood: 10,
+//     //             // });
+//     //             // i.location = chance.address();
+//     //             // i.attendees = chance.bool({
+//     //             //   likelihood: 70,
+//     //             // })
+//     //             //   ? generateNames()
+//     //             //   : [];
+//     //             // i.recurrenceRule = chance.bool({
+//     //             //   likelihood: 20,
+//     //             // })
+//     //             //   ? "repeated events"
+//     //             //   : "";
+//     //             // i.state = chance.bool({
+//     //             //   likelihood: 20,
+//     //             // })
+//     //             //   ? "Free"
+//     //             //   : "Busy";
+//     //             i.color = e.color;
+//     //             i.bgColor = e.bgColor;
+//     //             i.dragBgColor = e.dragBgColor;
+//     //             i.borderColor = e.borderColor;
+//     //             "milestone" === i.category &&
+//     //                 ((i.color = i.bgColor),
+//     //                     (i.bgColor = "transparent"),
+//     //                     (i.dragBgColor = "transparent"),
+//     //                     (i.borderColor = "transparent"));
+//     //             // i.raw.memo = chance.sentence();
+//     //             // i.raw.creator.name = chance.name();
+//     //             // i.raw.creator.avatar = chance.avatar();
+//     //             // i.raw.creator.company = chance.company();
+//     //             // i.raw.creator.email = chance.email();
+//     //             // i.raw.creator.phone = chance.phone();
+//     //             // chance.bool({
+//     //             //   likelihood: 20,
+//     //             // }) && ((n = chance.minute()), (i.goingDuration = n), (i.comingDuration = n));
+//     //             console.log(i);
+//     //             ScheduleList.push(i);
+//     //         // console.log(ScheduleList);
+
+
+//     //         // // // console.log(data);
+//     //         // // var n;
+           
+//     //         // // // console.log(e.id, e.name, a._date, o._date);
+//     //         // var  il = 0;
+//     //         // $.each(data.data, function (index, row) {
+//     //         //     var i = new ScheduleInfo();
+//     //         //     const id = row.id;
+//     //         //     const title = row.title;
+//     //         //     // const startDate = row.start;
+//     //         //     // const endDate = row.end;
+
+//     //         //     i.id = id;
+//     //         //     i.calendarId = calendarId;
+//     //         //     i.title = title;
+//     //         //     i.body = "row.body";
+//     //         //     const startDate = new Date("09/12/2023");
+//     //         //     const endDate = new Date("09/14/2023");
+//     //         //     generateTime(i, startDate, endDate);
+
+//     //         //     i.color = "#556ee6";
+//     //         //     i.bgColor = "#556ee6";
+//     //         //     i.dragBgColor = "#556ee6";
+//     //         //     i.borderColor = "#556ee6";
+//     //         //     // "milestone" === "milestone" &&
+//     //         //     //     ((i.color = i.bgColor),
+//     //         //     //         (i.bgColor = "transparent"),
+//     //         //     //         (i.dragBgColor = "transparent"),
+//     //         //     //         (i.borderColor = "transparent"));
+            
+//     //         //     ScheduleList.push(i);
+//     //         //     // console.log(i);
+//     //         //     console.log(ScheduleList);
+
+//     //         // });
+            
+//     //     }
+//     // });
+
+
+//     // i.isReadOnly = chance.bool({
+//     //   likelihood: 20,
+//     // });
+
+
 //     // i.isPrivate = chance.bool({
 //     //   likelihood: 10,
 //     // });
@@ -266,15 +304,7 @@ async function generateRandomSchedule(e, a, o) {
 //     // })
 //     //   ? "Free"
 //     //   : "Busy";
-//     i.color = e.color;
-//     i.bgColor = e.bgColor;
-//     i.dragBgColor = e.dragBgColor;
-//     i.borderColor = e.borderColor;
-//     "milestone" === i.category &&
-//         ((i.color = i.bgColor),
-//             (i.bgColor = "transparent"),
-//             (i.dragBgColor = "transparent"),
-//             (i.borderColor = "transparent"));
+
 //     // i.raw.memo = chance.sentence();
 //     // i.raw.creator.name = chance.name();
 //     // i.raw.creator.avatar = chance.avatar();
@@ -284,16 +314,12 @@ async function generateRandomSchedule(e, a, o) {
 //     // chance.bool({
 //     //   likelihood: 20,
 //     // }) && ((n = chance.minute()), (i.goingDuration = n), (i.comingDuration = n));
-//     console.log(i);
-//     ScheduleList.push(i);
-// // console.log(ScheduleList);
 
 // }
 
-
 function generateSchedule(n, i, t) {
     ScheduleList = [];
-    // console.log(t);
+    console.log(ScheduleList);
     CalendarList.forEach(function (e) {
         var a = 0;
         var o = 10;

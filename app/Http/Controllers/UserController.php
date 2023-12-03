@@ -13,7 +13,7 @@ class UserController extends Controller
     public function user_list()
     { 
         $a_id=Session::get('USER_ID');
-    	$u_obj=UserModel::where(['delete'=>0,'a_id'=>$a_id])->where('role','!=','0')->orderby('created_at','DESC')->get();
+    	$u_obj=UserModel::where(['delete'=>0])->where('role','!=','0')->orderby('created_at','DESC')->get();
 		// dd($u_obj);
     	return view('users.users_list',compact('u_obj'));
     }
@@ -95,7 +95,7 @@ class UserController extends Controller
 				$a_id=Session::get('USER_ID');
 				$permitted='abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
 				$pass=substr(str_shuffle($permitted),0,6);
-				$password=Hash::make($pass);
+				$password=Hash::make($mobile);
 
 				$u_obj=new UserModel();
 				$u_obj->name=$name;

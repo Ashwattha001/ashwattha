@@ -42,8 +42,11 @@ class TaskController extends Controller
             ->select('pr.id','pr.enquiry_no','pr.project_name','pr.client_ph_no','pr.client_name','pr.enq_date','pr.project_type','pr.client_requirement','pr.pr_address','pr.client_document','pr.pr_head_conceptual','pr.team_member_conceptual','pr.site_supervisor','pr.enq_status','pr.a_id','pr.updated_at','pr.delete','pr.enq_status','u.name as name','u.delete as u_delete','u.is_active')
             ->where(['pr.delete'=>0,'pr.project_type'=>$project_type])
             ->where('enq_status','!=',"Converted")
-            ->orderby('pr.updated_at','DESC')
-            ->get();
+            ->orderby('pr.updated_at','DESC');
+            if($roles == 1){
+                $data = $data->where('pr_head_conceptual', $a_id);
+            }
+            $data = $data->get();
 
             foreach($data as $d){
                
@@ -221,7 +224,7 @@ class TaskController extends Controller
             foreach($data as $d){
             
                 // get task assign name
-                $u_obj1=UserModel::where(['delete'=>0,'id'=>$d->et_aid])->orderby('created_at','DESC')->get();
+                $u_obj1=UserModel::where(['delete'=>0,'id'=>$d->assign_id])->orderby('created_at','DESC')->get();
                 foreach($u_obj1 as $u){
                     $d->assign_name = $u->name;
                 }
@@ -231,11 +234,13 @@ class TaskController extends Controller
 
             $data = [];
             //get peoject records
-            $data1=DB::table('enquiry_tasks as et')
+            $data1=DB::table('projects as pr')
+            ->leftjoin('enquiry_tasks as et','et.enq_pr_id','pr.id')
             ->leftjoin('users as u','u.id','et.team_member')
-            ->leftjoin('projects as pr','pr.id','et.enq_pr_id')
-            ->select('et.id','pr.enquiry_no','pr.project_name','pr.client_ph_no','pr.client_name','pr.enq_date','pr.project_type','pr.client_requirement','pr.pr_address','pr.client_document','pr.enq_status','pr.a_id','pr.updated_at','pr.delete','pr.team_member_conceptual','et.task_status','et.enq_pr_id','et.task_date','et.assign_id','et.end_date','et.task_remark','et.employee_remark','et.team_member','et.a_id as et_aid','et.delete as et_delete','u.id as uid','u.name as name','u.delete as u_delete','u.is_active')
-            ->where(['pr.delete'=>0,'et.delete'=>0,'et.team_member'=>$a_id])
+            ->select('et.id','pr.enquiry_no','pr.project_name','pr.client_ph_no','pr.client_name','pr.enq_date','pr.project_type','pr.client_requirement','pr.pr_address','pr.client_document','pr.enq_status','pr.pr_head_conceptual','pr.pr_head_working','pr.a_id','pr.updated_at','pr.delete','pr.team_member_conceptual','et.task_status','et.enq_pr_id','et.task_date','et.assign_id','et.end_date','et.task_remark','et.employee_remark','et.team_member','et.a_id as et_aid','et.delete as et_delete','u.id as uid','u.name as name','u.delete as u_delete','u.is_active')
+            ->where(['pr.delete'=>0,'et.delete'=>0])
+            ->where('pr.pr_head_conceptual', $a_id)->orWhere('pr.pr_head_working', $a_id)
+            ->where('pr.enq_status','!=','Converted')
             ->orderby('pr.updated_at','DESC')
             ->get();
 
@@ -251,25 +256,25 @@ class TaskController extends Controller
                 array_push($data, $d1);          // Push user id for task
             }
 
-            $data2=DB::table('enquiry_tasks as et')
-            ->leftjoin('users as u','u.id','et.team_member')
-            ->leftjoin('projects as pr','pr.id','et.enq_pr_id')
-            ->select('et.id','pr.enquiry_no','pr.project_name','pr.client_ph_no','pr.client_name','pr.enq_date','pr.project_type','pr.client_requirement','pr.pr_address','pr.client_document','pr.enq_status','pr.a_id','pr.updated_at','pr.delete','pr.team_member_conceptual','et.task_status','et.enq_pr_id','et.task_date','et.assign_id','et.end_date','et.task_remark','et.employee_remark','et.team_member','et.a_id as et_aid','et.delete as et_delete','u.id as uid','u.name as name','u.delete as u_delete','u.is_active')
-            ->where(['pr.delete'=>0,'et.delete'=>0,'et.assign_id'=>$a_id])
-            ->orderby('pr.updated_at','DESC')
-            ->get();
+            // $data2=DB::table('enquiry_tasks as et')
+            // ->leftjoin('users as u','u.id','et.team_member')
+            // ->leftjoin('projects as pr','pr.id','et.enq_pr_id')
+            // ->select('et.id','pr.enquiry_no','pr.project_name','pr.client_ph_no','pr.client_name','pr.enq_date','pr.project_type','pr.client_requirement','pr.pr_address','pr.client_document','pr.enq_status','pr.a_id','pr.updated_at','pr.delete','pr.team_member_conceptual','et.task_status','et.enq_pr_id','et.task_date','et.assign_id','et.end_date','et.task_remark','et.employee_remark','et.team_member','et.a_id as et_aid','et.delete as et_delete','u.id as uid','u.name as name','u.delete as u_delete','u.is_active')
+            // ->where(['pr.delete'=>0,'et.delete'=>0,'et.assign_id'=>$a_id])
+            // ->orderby('pr.updated_at','DESC')
+            // ->get();
 
-            foreach($data2 as $d2){
-                // get task assign name
-                $u_obj1=UserModel::where(['delete'=>0,'id'=>$d2->assign_id])->orderby('created_at','DESC')->get();
-                foreach($u_obj1 as $u){
-                    $d2->assign_name = $u->name;
-                }
-            }
+            // foreach($data2 as $d2){
+            //     // get task assign name
+            //     $u_obj1=UserModel::where(['delete'=>0,'id'=>$d2->assign_id])->orderby('created_at','DESC')->get();
+            //     foreach($u_obj1 as $u){
+            //         $d2->assign_name = $u->name;
+            //     }
+            // }
 
-            foreach($data2 as $d2){
-                array_push($data, $d2);          // Push user id for task
-            }
+            // foreach($data2 as $d2){
+            //     array_push($data, $d2);          // Push user id for task
+            // }
 
         }else{
 
@@ -342,8 +347,11 @@ class TaskController extends Controller
             ->select('pr.id','pr.enquiry_no','pr.converted_no','pr.project_name','pr.client_ph_no','pr.client_name','pr.enq_date','pr.project_type','pr.client_requirement','pr.pr_address','pr.client_document','pr.pr_head_conceptual','pr.team_member_conceptual','pr.site_supervisor','pr.enq_status','pr.a_id','pr.updated_at','pr.delete','pr.enq_status','u.name as name','u.delete as u_delete','u.is_active')
             ->where(['pr.delete'=>0,'pr.project_type'=>$project_type])
             ->where('enq_status','=',"Converted")
-            ->orderby('pr.updated_at','DESC')
-            ->get();
+            ->orderby('pr.updated_at','DESC');
+            if($roles == 1){
+                $data = $data->where('pr.pr_head_conceptual', $a_id)->orWhere('pr.pr_head_working', $a_id);
+            }
+            $data = $data->get();
 
             foreach($data as $d){
                
@@ -633,5 +641,109 @@ class TaskController extends Controller
         }else{
            return ['status' => false, 'message' => 'Task Deletion Unsuccessfull...!'];
         }
+    }
+
+
+    public function getTasksbkb(Request $req)
+    {
+        $roles=Session::get('ROLES');
+        $a_id=Session::get('USER_ID');
+       
+        //for all user
+        $u_obj=UserModel::where(['delete'=>0,'is_active'=>0])->where('role','!=','0')->orderby('created_at','DESC')->get();
+
+        if($roles == 0){
+            //get peoject records
+            $data=DB::table('enquiry_tasks as et')
+            ->leftjoin('users as u','u.id','et.team_member')
+            ->leftjoin('projects as pr','pr.id','et.enq_pr_id')
+            ->select('et.id','pr.enquiry_no','pr.project_name','pr.client_ph_no','pr.client_name','pr.enq_date','pr.project_type','pr.client_requirement','pr.pr_address','pr.client_document','pr.enq_status','pr.a_id','pr.updated_at','pr.delete','pr.team_member_conceptual','et.task_status','et.enq_pr_id','et.task_date','et.assign_id','et.end_date','et.task_remark','et.employee_remark','et.team_member','et.a_id as et_aid','et.delete as et_delete','u.id as uid','u.name as name','u.delete as u_delete','u.is_active')
+            ->where(['pr.delete'=>0,'et.delete'=>0])
+            ->orderby('pr.updated_at','DESC')
+            ->get();
+
+            foreach($data as $d){
+            
+                // get task assign name
+                $u_obj1=UserModel::where(['delete'=>0,'id'=>$d->assign_id])->orderby('created_at','DESC')->get();
+                foreach($u_obj1 as $u){
+                    $d->assign_name = $u->name;
+                }
+
+            }
+        }else if($roles == 1){
+
+            $data = [];
+            //get peoject records
+            $data1=DB::table('enquiry_tasks as et')
+            ->leftjoin('users as u','u.id','et.team_member')
+            ->leftjoin('projects as pr','pr.id','et.enq_pr_id')
+            ->select('et.id','pr.enquiry_no','pr.project_name','pr.client_ph_no','pr.client_name','pr.enq_date','pr.project_type','pr.client_requirement','pr.pr_address','pr.client_document','pr.enq_status','pr.a_id','pr.updated_at','pr.delete','pr.team_member_conceptual','et.task_status','et.enq_pr_id','et.task_date','et.assign_id','et.end_date','et.task_remark','et.employee_remark','et.team_member','et.a_id as et_aid','et.delete as et_delete','u.id as uid','u.name as name','u.delete as u_delete','u.is_active')
+            ->where(['pr.delete'=>0,'et.delete'=>0,'et.team_member'=>$a_id])
+            ->orderby('pr.updated_at','DESC')
+            ->get();
+
+            foreach($data1 as $d1){
+                // get task assign name
+                $u_obj1=UserModel::where(['delete'=>0,'id'=>$d1->assign_id])->orderby('created_at','DESC')->get();
+                foreach($u_obj1 as $u){
+                    $d1->assign_name = $u->name;
+                }
+            }
+
+            foreach($data1 as $d1){
+                array_push($data, $d1);          // Push user id for task
+            }
+
+            $data2=DB::table('enquiry_tasks as et')
+            ->leftjoin('users as u','u.id','et.team_member')
+            ->leftjoin('projects as pr','pr.id','et.enq_pr_id')
+            ->select('et.id','pr.enquiry_no','pr.project_name','pr.client_ph_no','pr.client_name','pr.enq_date','pr.project_type','pr.client_requirement','pr.pr_address','pr.client_document','pr.enq_status','pr.a_id','pr.updated_at','pr.delete','pr.team_member_conceptual','et.task_status','et.enq_pr_id','et.task_date','et.assign_id','et.end_date','et.task_remark','et.employee_remark','et.team_member','et.a_id as et_aid','et.delete as et_delete','u.id as uid','u.name as name','u.delete as u_delete','u.is_active')
+            ->where(['pr.delete'=>0,'et.delete'=>0,'et.assign_id'=>$a_id])
+            ->orderby('pr.updated_at','DESC')
+            ->get();
+
+            foreach($data2 as $d2){
+                // get task assign name
+                $u_obj1=UserModel::where(['delete'=>0,'id'=>$d2->assign_id])->orderby('created_at','DESC')->get();
+                foreach($u_obj1 as $u){
+                    $d2->assign_name = $u->name;
+                }
+            }
+
+            foreach($data2 as $d2){
+                array_push($data, $d2);          // Push user id for task
+            }
+
+        }else{
+
+            //get peoject records
+            $data=DB::table('enquiry_tasks as et')
+            ->leftjoin('users as u','u.id','et.team_member')
+            ->leftjoin('projects as pr','pr.id','et.enq_pr_id')
+            ->select('et.id','pr.enquiry_no','pr.project_name','pr.client_ph_no','pr.client_name','pr.enq_date','pr.project_type','pr.client_requirement','pr.pr_address','pr.client_document','pr.enq_status','pr.a_id','pr.updated_at','pr.delete','pr.team_member_conceptual','et.task_status','et.enq_pr_id','et.task_date','et.assign_id','et.end_date','et.task_remark','et.employee_remark','et.team_member','et.a_id as et_aid','et.delete as et_delete','u.id as uid','u.name as name','u.delete as u_delete','u.is_active')
+            ->where(['pr.delete'=>0,'et.delete'=>0,'et.team_member'=>$a_id])
+            ->orderby('pr.updated_at','DESC')
+            ->get();
+
+            foreach($data as $d){
+            
+                // get task assign name
+                $u_obj1=UserModel::where(['delete'=>0,'id'=>$d->assign_id])->orderby('created_at','DESC')->get();
+                foreach($u_obj1 as $u){
+                    $d->assign_name = $u->name;
+                }
+
+            }
+
+        }
+       
+
+        if(!empty($data)){
+            return json_encode(array('status' => true ,'data' => $data,'u_obj' => $u_obj,'roles' => $roles,'au_id' => $a_id,'message' => 'Data Found'));
+        }else{
+        return ['status' => false, 'message' => 'No Data Found'];
+        }
+
     }
 }
